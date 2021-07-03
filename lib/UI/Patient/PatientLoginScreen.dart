@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:untitled1/components/rounded_button.dart';
+import 'package:untitled1/components/rounded_input_field.dart';
 
 
 class PatientLoginScreen extends StatefulWidget {
@@ -14,6 +16,8 @@ class PatientLoginScreen extends StatefulWidget {
 
 class _PatientLoginScreenState extends State<PatientLoginScreen> {
   TextEditingController phoneNumber = TextEditingController();
+  TextEditingController OTPController = TextEditingController();
+
   void checkPhoneNumberAndSendOTP() {
     if (phoneNumber.text.length == 10) {
       // EasyLoading.show(
@@ -83,76 +87,22 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              new TextFormField(
-                style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 10,
-                  color: Colors.teal,
-                ),
-                controller: phoneNumber,
-                keyboardType: TextInputType.number,
-                maxLength: 10,
-                cursorColor: Colors.teal,
-                decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                ),
-              ),
-              new TextFormField(
-                style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 10,
-                  color: Colors.teal,
-                ),
-                controller: null,
-                maxLength: 6,
-                keyboardType: TextInputType.number,
-                cursorColor: Colors.teal,
-                decoration: InputDecoration(
-                  labelText: 'OTP',
-                ),
-              ),
+              RoundedInputField(controller: phoneNumber, hintText: 'Phone Number'),
+              RoundedInputField(controller: OTPController, hintText: "OTP",icon: Icons.lock_outline_rounded,),
               Container(
                 width: MediaQuery.of(context).size.width * 0.7,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      shadowColor: MaterialStateProperty.all<Color>(
-                          Colors.teal),
-                      elevation: MaterialStateProperty.all<double>(7),
-                      padding:
-                      MaterialStateProperty.all<EdgeInsetsGeometry>(
-                          EdgeInsets.all(15)),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.teal),
-                      shape:
-                      MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ))),
-                  onPressed: checkPhoneNumberAndSendOTP,
-                  child: Text("SEND OTP"),
-                ),
+                child: RoundedButton(
+                  text: "Send OTP",
+                  press:  checkPhoneNumberAndSendOTP,
+                )
               ),
               Container(
                 margin: EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width * 0.7,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      elevation: MaterialStateProperty.all<double>(7),
-                      shadowColor: MaterialStateProperty.all<Color>(
-                          Colors.teal),
-                      padding:
-                      MaterialStateProperty.all<EdgeInsetsGeometry>(
-                          EdgeInsets.all(15)),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.teal),
-                      shape:
-                      MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ))),
-                  onPressed: null,
-                  child: Text("VERIFY"),
-                ),
+                child: RoundedButton(
+                  text: "Verify",
+                  press:  ()=>{},
+                )
               )
             ],
           ),
