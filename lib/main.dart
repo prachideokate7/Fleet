@@ -5,7 +5,7 @@ import 'package:untitled1/UI/Patient/PatientSignupScreen.dart';
 
 import 'UI/BeforeLogin/choosePHScreen.dart';
 import 'UI/Hospital/HospitalLoginScreen.dart';
-import 'UI/Hospital/HospitalMainScreen.dart';
+import 'UI/Hospital/MainScreen/HospitalMainScreen.dart';
 import 'UI/Hospital/HospitalSignupScreen.dart';
 import 'UI/Loading/splashScreen.dart';
 import 'UI/Patient/PatientLoginScreen.dart';
