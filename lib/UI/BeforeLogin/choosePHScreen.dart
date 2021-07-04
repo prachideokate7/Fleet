@@ -40,9 +40,9 @@ class _choosePHScreenState extends State<choosePHScreen> {
                   topLeft: Radius.circular(40), topRight: Radius.circular(40)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black,
-                  offset: Offset(0.0, 3.0), //(x,y)
-                  blurRadius: 8.0,
+                  color: Colors.black26,
+                  offset: Offset(1, 0.1 ), //(x,y)
+                  blurRadius: 5.0,
                 ),
               ],
             ),

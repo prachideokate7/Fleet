@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/UI/Patient/PatientLoginScreen.dart';
+import 'package:untitled1/UI/Patient/PatientSignupScreen.dart';
 
 import 'UI/BeforeLogin/choosePHScreen.dart';
 import 'UI/Loading/splashScreen.dart';
