@@ -5,12 +5,12 @@ import 'package:untitled1/components/rounded_button.dart';
 import 'configuration.dart';
 
 
-class HomeScreen extends StatefulWidget {
+class AddSlotsScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _AddSlotsScreenState createState() => _AddSlotsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AddSlotsScreenState extends State<AddSlotsScreen> {
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -83,22 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       CircleAvatar()
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                  margin: EdgeInsets.symmetric(vertical: 30,horizontal: 20),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.search),
-                      Text('Search Hospital'),
-                      Icon(Icons.settings)
                     ],
                   ),
                 ),

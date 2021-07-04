@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/components/rounded_button.dart';
 
 import 'configuration.dart';
 
 class DrawerScreen extends StatefulWidget {
+  int ScreenNumber = 0;
+  DrawerScreen(int ScreenNumber){
+    this.ScreenNumber = ScreenNumber;
+  }
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
@@ -24,40 +29,45 @@ class _DrawerScreenState extends State<DrawerScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Miroslava Savitskaya',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                  Text('Active Status',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))
+                  Text('Yash Dhanlobhe',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                  Text('8668611930',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))
                 ],
               )
             ],
           ),
 
           Column(
-            children: drawerItems.map((element) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Icon(element['icon'],color: Colors.white,size: 30,),
-                  SizedBox(width: 10,),
-                  Text(element['title'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20))
-                ],
+            children: drawerItems.map((element) => GestureDetector(
+              onTap: (){setState(() {
+              });},
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Icon(element['icon'],color: Colors.white,size: 30,),
+                    SizedBox(width: 10,),
+                    Text(element['title'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20))
+                  ],
 
+                ),
               ),
             )).toList(),
           ),
 
-          Row(
-            children: [
-              Icon(Icons.settings,color: Colors.white,),
-              SizedBox(width: 10,),
-              Text('Settings',style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-              SizedBox(width: 10,),
-              Container(width: 2,height: 20,color: Colors.white,),
-              SizedBox(width: 10,),
-              Text('Log out',style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
+          GestureDetector(
+            onTap: (){
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacementNamed(context, "/choosePHScreen");
+            },
+            child: Row(
+              children: [
+                SizedBox(width: 10,),
+                Icon(Icons.logout,color: Colors.red,size: 30,),
+                SizedBox(width: 10,),
+                Text('Log out',style:TextStyle(fontSize: 20 , color: Colors.red,fontWeight: FontWeight.bold),)
+              ],
 
-
-            ],
-
+            ),
           )
 
 

@@ -37,7 +37,6 @@ class _MainClassState extends State<MainClass> {
         '/choosePHScreen/patientSignup' : (context) =>PatientSignupScreen(),
         '/choosePHScreen/HospitalSignup' : (context) =>HospitalSignupScreen(),
         '/choosePHScreen/HospitalLogin' : (context) =>HospitalLoginScreen(),
-
         '/HospitalMainScreen' : (context) =>HospitalMainScreen(),
         '/patientMainScreen' : (context) =>PatientMainScreen(),
 
