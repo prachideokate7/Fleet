@@ -53,15 +53,15 @@ class _choosePHScreenState extends State<choosePHScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    getCard("hospital" , context , "/choosePHScreen/doctorLogin"),
                     getCard("patient" , context ,"/choosePHScreen/patientLogin" ),
+                    getCard("hospital" , context , "/choosePHScreen/HospitalLogin"),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    getCard("hospital" , context , "/choosePHScreen/doctorLogin"),
-                    getCard("patient" , context ,"/choosePHScreen/patientLogin" ),
+                    getCard("hospital" , context , "/choosePHScreen"),
+                    getCard("patient" , context ,"/choosePHScreen" ),
                   ],
                 )
               ],

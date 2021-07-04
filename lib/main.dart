@@ -4,6 +4,9 @@ import 'package:untitled1/UI/Patient/PatientMainScreen.dart';
 import 'package:untitled1/UI/Patient/PatientSignupScreen.dart';
 
 import 'UI/BeforeLogin/choosePHScreen.dart';
+import 'UI/Hospital/HospitalLoginScreen.dart';
+import 'UI/Hospital/HospitalMainScreen.dart';
+import 'UI/Hospital/HospitalSignupScreen.dart';
 import 'UI/Loading/splashScreen.dart';
 import 'UI/Patient/PatientLoginScreen.dart';
 import 'UI/Payment/finalPaymentScreen.dart';
@@ -31,9 +34,11 @@ class _MainClassState extends State<MainClass> {
         '/finalPaymentScreen' : (context) => finalPaymentScreen(),
         '/choosePHScreen' : (context) =>choosePHScreen(),
         '/choosePHScreen/patientLogin' : (context) =>PatientLoginScreen(),
-        '/choosePHScreen/patientSignup' : (context) =>PatientLoginScreen(),
-        '/choosePHScreen/doctorLogin' : (context) =>PatientLoginScreen(),
-        '/doctorMainScreen' : (context) =>PatientLoginScreen(),
+        '/choosePHScreen/patientSignup' : (context) =>PatientSignupScreen(),
+        '/choosePHScreen/HospitalSignup' : (context) =>HospitalSignupScreen(),
+        '/choosePHScreen/HospitalLogin' : (context) =>HospitalLoginScreen(),
+
+        '/HospitalMainScreen' : (context) =>HospitalMainScreen(),
         '/patientMainScreen' : (context) =>PatientMainScreen(),
 
       },

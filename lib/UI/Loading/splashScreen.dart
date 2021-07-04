@@ -24,7 +24,7 @@ class _splashScreenState extends State<splashScreen> {
     if (FirebaseAuth.instance.currentUser != null) {
       Navigator.pushReplacementNamed(context, "/patientMainScreen");
     } else {
-      Navigator.pushReplacementNamed(context, "/choosePHScreen");
+      // Navigator.pushReplacementNamed(context, "/choosePHScreen");
     }
   }
   @override

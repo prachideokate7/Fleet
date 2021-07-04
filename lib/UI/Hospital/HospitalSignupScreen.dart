@@ -8,14 +8,14 @@ import 'package:untitled1/UI/Patient/loginBackground.dart';
 import 'package:untitled1/components/rounded_button.dart';
 import 'package:untitled1/components/rounded_input_field.dart';
 
-class PatientSignupScreen extends StatefulWidget {
-  const PatientSignupScreen({Key? key}) : super(key: key);
+class HospitalSignupScreen extends StatefulWidget {
+  const HospitalSignupScreen({Key? key}) : super(key: key);
 
   @override
   _PatientLoginScreenState createState() => _PatientLoginScreenState();
 }
 
-class _PatientLoginScreenState extends State<PatientSignupScreen> {
+class _PatientLoginScreenState extends State<HospitalSignupScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
@@ -47,7 +47,6 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {
           Fluttertoast.showToast(msg: e.toString());
-          print("yash" + e.toString());
         },
         codeSent: (String verificationId, int? resendToken) {
           Fluttertoast.showToast(msg: "code sent!");
@@ -86,7 +85,7 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
         addSignUpData(name: fullNameController.text , password: passwordController.text , phoneNumber: phoneNumberController.text , email: emailController.text);
         EasyLoading.showToast("Logged in successfully.",
             toastPosition: EasyLoadingToastPosition.bottom);
-        Navigator.pushReplacementNamed(context, '/patientMainScreen');
+        Navigator.pushReplacementNamed(context, '/HospitalMainScreen');
       } else {
         EasyLoading.showError("Enter valid OTP");
       }
@@ -134,15 +133,15 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     RoundedInputField(
-                        controller: fullNameController, hintText: 'Full Name'),
+                        controller: fullNameController, hintText: 'Hospital Name'),
                     RoundedInputField(
                       controller: emailController,
-                      hintText: "Email",
+                      hintText: "Hospital Email",
                       icon: Icons.email,
                     ),
                     RoundedInputField(
                       controller: phoneNumberController,
-                      hintText: 'Phone Number',
+                      hintText: 'Hospital Phone Number',
                       icon: Icons.phone,
                     ),
                     RoundedInputField(
@@ -165,7 +164,7 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
                     ),
                     TextButton(
                       onPressed: () => Navigator.pushReplacementNamed(
-                          context, "/choosePHScreen/patientLogin"),
+                          context, "/choosePHScreen/HospitalLogin"),
                       child: Text("Already have an account?"),
                     )
                   ],
@@ -188,7 +187,7 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
   void addSignUpData(
       {required String phoneNumber, String email = "", required String name, required String password}) {
     FirebaseFirestore.instance
-        .collection("patients")
+        .collection("hospitals")
         .doc("+91"+phoneNumber)
         .set({"phone": "+91"+phoneNumber , "name" : name , "password" : password  , "email" : email });
   }

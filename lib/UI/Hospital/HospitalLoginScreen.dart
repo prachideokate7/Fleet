@@ -1,27 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/UI/Hospital/HospitalData.dart';
 import 'package:untitled1/UI/Patient/PatienData.dart';
 import 'package:untitled1/components/rounded_button.dart';
 import 'package:untitled1/components/rounded_input_field.dart';
 
 import 'loginBackground.dart';
 
-class PatientLoginScreen extends StatefulWidget {
-  const PatientLoginScreen({Key? key}) : super(key: key);
+class HospitalLoginScreen extends StatefulWidget {
+  const HospitalLoginScreen({Key? key}) : super(key: key);
 
   @override
   _PatientLoginScreenState createState() => _PatientLoginScreenState();
 }
 
-class _PatientLoginScreenState extends State<PatientLoginScreen> {
+class _PatientLoginScreenState extends State<HospitalLoginScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
 
   Future<void> Login() async {
-    PatientData pd = await getPassword(phoneNumberController.text);
-    if (pd.password == passwordController.text)
-      Navigator.pushReplacementNamed(context, "/patientMainScreen");
+    HospitalData hd = await getPassword(phoneNumberController.text);
+    if (hd.password == passwordController.text)
+      Navigator.pushReplacementNamed(context, "/HospitalMainScreen");
   }
 
   @override
@@ -56,7 +57,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
                   children: [
                     RoundedInputField(
                       controller: phoneNumberController,
-                      hintText: 'Phone Number',
+                      hintText: 'Hospital Phone Number',
                       icon: Icons.phone,
                     ),
                     RoundedInputField(
@@ -70,7 +71,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
                     ),
                     TextButton(
                       onPressed: () => Navigator.pushReplacementNamed(
-                          context, "/choosePHScreen/patientSignup"),
+                          context, "/choosePHScreen/HospitalSignup"),
                       child: Text("Sign Up"),
                     )
                   ],
@@ -90,25 +91,25 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
     return false;
   }
 
-  Future<PatientData> getPassword(String text) async {
+  Future<HospitalData> getPassword(String text) async {
     Map<String, dynamic>? data;
-    PatientData pd;
+    HospitalData hd;
     try {
       await FirebaseFirestore.instance
-          .collection("patients")
+          .collection("hospitals")
           .doc("+91" + text)
           .get()
           .then((value) => data = value.data());
     } catch (e) {}
     if (data != null) {
-      pd = new PatientData(
+      hd = new HospitalData(
           password: data!["password"],
           name: data!["name"],
           phone: data!["phone"],
           email: data!["email"]);
     } else {
-      pd = new PatientData(password: "", name: "", phone: "", email: "");
+      hd = new HospitalData(password: "", name: "", phone: "", email: "");
     }
-    return pd;
+    return hd;
   }
 }
