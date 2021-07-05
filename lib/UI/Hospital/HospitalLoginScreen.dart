@@ -29,7 +29,6 @@ class _PatientLoginScreenState extends State<HospitalLoginScreen> {
     if (phoneNumberController.text.length == 10) {
       EasyLoading.show(
           status: 'Sending OTP...',
-          maskType: EasyLoadingMaskType.custom,
           dismissOnTap: true);
       sentOTP(phoneNumberController.text);
     } else {

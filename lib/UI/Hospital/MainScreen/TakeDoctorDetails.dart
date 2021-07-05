@@ -41,13 +41,13 @@ class _TakeDoctorDetailsState extends State<TakeDoctorDetails> {
 
   void addDoctorToDatabase() {
 
-     print(FirebaseAuth.instance.currentUser.toString());
-    // FirebaseFirestore.instance
-    //     .collection("hospitals")
-    //     .doc(str)
-    //     .collection("doctors")
-    //     .doc(phoneNo.text)
-    //     .set({"phone": "+91"+phoneNo.text , "name" : doctorName.text , "degree" : degree.text  , "email" : email.text , "experience" : experience.text , "department" : department.text });
+    String str = FirebaseAuth.instance.currentUser!.phoneNumber.toString();
+    FirebaseFirestore.instance
+        .collection("hospitals")
+        .doc(str)
+        .collection("doctors")
+        .doc(phoneNo.text)
+        .set({"phone": "+91"+phoneNo.text , "name" : doctorName.text , "degree" : degree.text  , "email" : email.text , "experience" : experience.text , "department" : department.text });
     doctorName.clear();
     degree.clear();
     phoneNo.clear();
