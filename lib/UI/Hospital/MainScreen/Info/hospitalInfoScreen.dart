@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/components/rounded_button.dart';
 
-import 'configuration.dart';
+import '../configuration.dart';
 
 
 class HomeScreen extends StatefulWidget {

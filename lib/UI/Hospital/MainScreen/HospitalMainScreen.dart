@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../HospitalData.dart';
-import 'AddSlots.dart';
-import 'hospitalInfoScreen.dart';
+import 'Add Slots/AddSlots.dart';
+import 'Info/hospitalInfoScreen.dart';
 import 'configuration.dart';
-import 'AddDoctorScreen.dart';
+import 'Add Doctor/AddDoctorScreen.dart';
 
 
 var ScreenNumber = 0;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:untitled1/UI/Patient/PatientMainScreen.dart';
-import 'package:untitled1/UI/Patient/PatientSignupScreen.dart';
+import 'package:untitled1/UI/Patient/Mainscreen/PatientMainScreen.dart';
+import 'package:untitled1/UI/Patient/Login%20and%20Signup/PatientSignupScreen.dart';
 
-import 'UI/BeforeLogin/choosePHScreen.dart';
-import 'UI/Hospital/HospitalLoginScreen.dart';
+import 'UI/choosePHScreen.dart';
+import 'UI/Hospital/Login and Signup/HospitalLoginScreen.dart';
 import 'UI/Hospital/MainScreen/HospitalMainScreen.dart';
-import 'UI/Hospital/HospitalSignupScreen.dart';
-import 'UI/Loading/splashScreen.dart';
-import 'UI/Patient/PatientLoginScreen.dart';
+import 'UI/Hospital/Login and Signup/HospitalSignupScreen.dart';
+import 'splashScreen.dart';
+import 'UI/Patient/Login and Signup/PatientLoginScreen.dart';
 import 'UI/Payment/finalPaymentScreen.dart';
 
 void main() {
