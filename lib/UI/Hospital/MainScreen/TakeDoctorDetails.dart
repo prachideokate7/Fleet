@@ -40,7 +40,6 @@ class _TakeDoctorDetailsState extends State<TakeDoctorDetails> {
   }
 
   void addDoctorToDatabase() {
-
     String str = FirebaseAuth.instance.currentUser!.phoneNumber.toString();
     FirebaseFirestore.instance
         .collection("hospitals")
