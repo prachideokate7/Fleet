@@ -23,8 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AnimatedContainer(
       transform: Matrix4.translationValues(xOffset, yOffset, 0)
         ..scale(scaleFactor)..rotateY(isDrawerOpen? -0.5:0),
-      duration: Duration(milliseconds: 250),
-
+      duration: Duration(milliseconds: 300),
       decoration: BoxDecoration(
           color: Colors.grey[200],
           borderRadius: BorderRadius.circular(isDrawerOpen?40:0.0)

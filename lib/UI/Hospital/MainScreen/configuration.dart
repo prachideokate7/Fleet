@@ -25,7 +25,7 @@ List<Map> drawerItems=[
     'screenNumber' : 1
   },
   {
-    'icon': Icons.ac_unit,
+    'icon': Icons.medical_services,
     'title' : 'Add Doctor',
     'screenNumber' : 2
   },

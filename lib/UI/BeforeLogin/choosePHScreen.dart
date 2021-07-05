@@ -74,7 +74,7 @@ class _choosePHScreenState extends State<choosePHScreen> {
 
   getCard(String s , BuildContext context , String routeName) {
     return GestureDetector(
-      onTap: ()=>Navigator.pushNamed(context, routeName),
+      onTap: ()=>Navigator.pushReplacementNamed(context, routeName),
       child: Card(
         elevation: 8,
         shape: RoundedRectangleBorder(

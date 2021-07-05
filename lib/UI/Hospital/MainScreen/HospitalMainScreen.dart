@@ -1,15 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../HospitalData.dart';
 import 'AddSlots.dart';
-import 'HomeScreen.dart';
+import 'hospitalInfoScreen.dart';
 import 'configuration.dart';
+import 'AddDoctorScreen.dart';
+
 
 var ScreenNumber = 0;
 
 class HospitalMainScreen extends StatefulWidget {
+
+  // static  Future<HospitalData> currentHospitalData =  getUser(FirebaseAuth.instance.currentUser!.phoneNumber.toString());
+
   const HospitalMainScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,10 +27,12 @@ class _PatientMainScreenState extends State<HospitalMainScreen> {
   List<StatefulWidget> list = [
     HomeScreen(),
     AddSlotsScreen(),
+    AddDoctorScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: [
@@ -130,4 +139,25 @@ class _PatientMainScreenState extends State<HospitalMainScreen> {
       ),
     );
   }
+}
+Future<HospitalData> getUser(String text) async {
+  Map<String, dynamic>? data;
+  HospitalData pd;
+  try {
+    await FirebaseFirestore.instance
+        .collection("hospitals")
+        .doc("+91" + text)
+        .get()
+        .then((value) => data = value.data());
+  } catch (e) {}
+  if (data != null) {
+    pd = new HospitalData(
+        password: data!["password"],
+        name: data!["name"],
+        phone: data!["phone"],
+        email: data!["email"]);
+  } else {
+    pd = new HospitalData(password: "", name: "", phone: "", email: "");
+  }
+  return pd;
 }
