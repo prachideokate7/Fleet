@@ -15,16 +15,19 @@ List<Map> categories = [
 
 List<Map> drawerItems=[
   {
-    'icon': Icons.ac_unit,
-    'title' : 'Adoption'
+    'icon': Icons.info,
+    'title' : 'Info',
+    'screenNumber' : 0
   },
   {
-    'icon': Icons.mail,
-    'title' : 'Donation'
+    'icon': Icons.add_box_rounded,
+    'title' : 'Add Slots',
+    'screenNumber' : 1
   },
   {
-    'icon': Icons.ac_unit,
-    'title' : 'Add pet'
+    'icon': Icons.medical_services,
+    'title' : 'Add Doctor',
+    'screenNumber' : 2
   },
   {
     'icon': Icons.favorite,
