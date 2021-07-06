@@ -93,7 +93,7 @@ class _AddSlotsScreenState extends State<AddSlotsScreen> {
                       ],
                     ),
                   ),
-                  doctorList(),
+                  doctorList(context),
                 ],
             )
           ],
@@ -102,10 +102,10 @@ class _AddSlotsScreenState extends State<AddSlotsScreen> {
     );
   }
 
-  doctorList() {
+  doctorList(BuildContext context) {
     return Container(
       width: isPortrait(context)? MediaQuery.of(context).size.width : MediaQuery.of(context).size.width*0.5,
-      height: MediaQuery.of(context).size.width * 0.95,
+      height: MediaQuery.of(context).size.height*0.9,
       child: StreamBuilder<QuerySnapshot>(
           stream: collectionReference.snapshots(),
           builder: (context, snapshot) {

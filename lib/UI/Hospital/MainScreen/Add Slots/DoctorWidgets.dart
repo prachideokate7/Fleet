@@ -10,48 +10,46 @@ class DoctorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(15),
-      child: Container(
-        padding: EdgeInsets.all(20),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 30,
-            ),
-            Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      doc["name"],
-                      style: TextStyle(
-                          fontSize: 22
+    return GestureDetector(
+      child: Card(
+        margin: EdgeInsets.all(15),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+              ),
+              Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        doc["name"],
+                        style: TextStyle(fontSize: 22),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          doc["degree"],
-                          style: TextStyle(
-                              fontSize: 22
+                      Row(
+                        children: [
+                          Text(
+                            doc["degree"],
+                            style: TextStyle(fontSize: 22),
                           ),
-                        ),
-                        Text(
-                          doc["experience"],
-                          style: TextStyle(
-                              fontSize: 22
+                          Text(
+                            doc["experience"],
+                            style: TextStyle(fontSize: 22),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-            )
-          ],
+                        ],
+                      )
+                    ],
+                  ))
+            ],
+          ),
         ),
       ),
+      onTap: () => Navigator.pushNamed(
+          context, "/HospitalMainScreen/AddSlotsMainScreen",
+          arguments: {"phone": doc["phone"] , "collection" : collectionReference}),
     );
   }
 }
