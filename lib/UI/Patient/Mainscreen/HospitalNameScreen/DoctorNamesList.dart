@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:untitled1/UI/Hospital/MainScreen/Add%20Slots/DoctorWidgets.dart';
+import 'DoctorWidgets.dart';
 late CollectionReference collectionReference;
 late String HospitalNO;
 class DoctorNamesList extends StatefulWidget {
