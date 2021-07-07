@@ -75,6 +75,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    docRef.set({data["slot"] : FieldValue.increment(-1)} , SetOptions(merge: true));
     Fluttertoast.showToast(msg: "Success");
 
   }
