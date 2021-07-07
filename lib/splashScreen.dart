@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class splashScreen extends StatefulWidget {
   const splashScreen({Key? key}) : super(key: key);
 
-
   @override
   _splashScreenState createState() => _splashScreenState();
 }
@@ -27,20 +26,14 @@ class _splashScreenState extends State<splashScreen> {
       Navigator.pushReplacementNamed(context, "/choosePHScreen");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     initializeFirebase(context);
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: Text(
-          "Yash",
-          style: TextStyle(
-            fontSize: 20,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: Image.asset("assets/icon/main_logo.png",width: 80,height: 80,),
       ),
     );
   }
