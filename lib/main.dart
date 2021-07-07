@@ -36,7 +36,7 @@ class _MainClassState extends State<MainClass> {
       builder: EasyLoading.init(),
       routes: {
         '/' : (context) => splashScreen(),
-        '/finalPaymentScreen' : (context) => finalPaymentScreen(),
+        '/finalPaymentScreen' : (context) => FinalPaymentScreen(),
         '/choosePHScreen' : (context) =>choosePHScreen(),
         '/choosePHScreen/patientLogin' : (context) =>PatientLoginScreen(),
         '/choosePHScreen/patientSignup' : (context) =>PatientSignupScreen(),
@@ -48,6 +48,7 @@ class _MainClassState extends State<MainClass> {
         '/patientMainScreen' : (context) =>PatientMainScreen(),
         '/patientMainScreen/selectDoctor' : (context) =>DoctorNamesList(),
         '/patientMainScreen/selectDoctor/chooseSlotScreen' : (context) =>ChooseSlotScreen(),
+
       },
       initialRoute: '/',
     );

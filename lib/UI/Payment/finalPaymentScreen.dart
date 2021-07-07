@@ -1,19 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:untitled1/components/rounded_button.dart';
 
 
+late DocumentReference docRef;
 
-class finalPaymentScreen extends StatefulWidget {
-  const finalPaymentScreen({Key? key}) : super(key: key);
+class FinalPaymentScreen extends StatefulWidget {
+  const FinalPaymentScreen({Key? key}) : super(key: key);
 
   @override
-  _finalPaymentScreenState createState() => _finalPaymentScreenState();
+  _FinalPaymentScreenState createState() => _FinalPaymentScreenState();
 }
 
-class _finalPaymentScreenState extends State<finalPaymentScreen> {
+class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
   late Razorpay _razorpay;
+  var data;
 
   @override
   void initState() {
@@ -50,22 +54,33 @@ class _finalPaymentScreenState extends State<finalPaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context)!.settings.arguments;
+    docRef = data["doc"];
+
     return Scaffold(
       body: Container(
-          alignment: Alignment.center,
-          child: ElevatedButton(
-            onPressed: checkOut,
-            child: Text("pay"),
-          ),
-      ),
+          margin: EdgeInsets.all(50),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(20),
+                color: kPrimaryColor,
+                child: Text(data["slot"] + "  " +data["val"]),
+              ),
+              RoundedButton(text: "MakePayment", press: () {checkOut();})
+            ],
+          )
+      )
     );
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    // Do something when payment succeeds
+    Fluttertoast.showToast(msg: "Success");
+
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(msg: "Failure");
     // Do something when payment fails
   }
 

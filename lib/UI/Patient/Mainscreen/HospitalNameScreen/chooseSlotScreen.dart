@@ -4,7 +4,9 @@ import 'package:untitled1/components/rounded_button.dart';
 
 late DocumentSnapshot doc;
 late DocumentReference docref;
-late  Map<String , dynamic> mapDoc;
+late Map<String, dynamic> mapDoc;
+late BuildContext ctx;
+
 class ChooseSlotScreen extends StatefulWidget {
   const ChooseSlotScreen({Key? key}) : super(key: key);
 
@@ -14,52 +16,53 @@ class ChooseSlotScreen extends StatefulWidget {
 
 class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
   var data;
+
   @override
   Widget build(BuildContext context) {
-    data =  ModalRoute.of(context)!.settings.arguments;
-    docref =data["doc"];
+    ctx = context;
+    data = ModalRoute.of(context)!.settings.arguments;
+    docref = data["doc"];
     print(docref.toString());
 
     return getAvailableSlotsList();
   }
 
   Widget getAvailableSlotsList() {
-    try{
+    try {
       return Container(
-        padding: EdgeInsets.all(40),
-        child:  Column(
+          padding: EdgeInsets.all(40),
+          child: Column(
             children: getListOfWid(),
-          )
-      );
-    }catch(exp){
+          ));
+    } catch (exp) {
       print(exp.toString());
-       getMapOfSlots();
+      getMapOfSlots();
     }
     return Container();
   }
 
   void getMapOfSlots() {
-     docref.get().then((value) =>
-         setState(() {
-            mapDoc = value.data()!;
-         })
-    );
+    docref.get().then((value) => setState(() {
+          mapDoc = value.data()!;
+        }));
   }
 
   getListOfWid() {
     List<Widget> lis = new List.filled(mapDoc.length, Container());
-    int x=0;
+    int x = 0;
     mapDoc.forEach((key, value) {
-      lis[x]=Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
-        color: kPrimaryColor,
-        child: Row(
-          children: [
-            Text(key.toString()),
-            Text(value.toString())
-          ],
+      lis[x] = GestureDetector(
+        child: Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+          color: kPrimaryColor,
+          child: Row(
+            children: [Text(key.toString()), Text(value.toString())],
+          ),
         ),
+        onTap: () => Navigator.pushNamed(ctx,
+            "/finalPaymentScreen",
+            arguments: {"slot" : key.toString() , "val" : value.toString() , "doc" : docref}),
       );
       x++;
     });
