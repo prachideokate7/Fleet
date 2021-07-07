@@ -1,5 +1,3 @@
-
-
 class PatientData {
   final String email;
   final String name;
