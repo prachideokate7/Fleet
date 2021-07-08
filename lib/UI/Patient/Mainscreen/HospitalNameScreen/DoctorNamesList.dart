@@ -281,7 +281,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
             ],
           ),
           width: MediaQuery.of(context).size.width/2 - 50,
-          height: MediaQuery.of(context).size.height - 500,
+          height: MediaQuery.of(context).size.height - 550,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18.0),
             color: const Color(0xffffffff),

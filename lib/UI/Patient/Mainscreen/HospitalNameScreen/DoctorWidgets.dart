@@ -15,41 +15,49 @@ class DoctorWidget extends StatelessWidget {
     return GestureDetector(
       child:  Container(
           padding: EdgeInsets.all(20),
-          child: Row(
+          child: Column(
             children: [
-              CircleAvatar(
-                radius: 30,
-              ),
-              Container(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(
-                          doc["name"],
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: kPrimaryColor),
-                          maxLines: 1,
-                        ),
-                        margin: EdgeInsets.only(left: 0),
-                      ),
-                      Row(
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                  ),
+                  Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            doc["degree"],
-                            style: TextStyle(fontSize: 22),
+                          Container(
+                            child: Text(
+                              doc["name"],
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                  color: kPrimaryColor),
+                              maxLines: 1,
+                            ),
+                            margin: EdgeInsets.only(left: 0),
                           ),
-                          Text(
-                            doc["experience"],
-                            style: TextStyle(fontSize: 22),
+                          Container(
+                            child: Text(
+                              doc["degree"],
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xff26282A)),
+                              maxLines: 1,
+                            ),
+                            margin: EdgeInsets.only(left: 0),
                           ),
                         ],
                       )
-                    ],
-                  ))
+                  )
+                ],
+              ),
+              Divider(
+                color: Color(0xff003358),
+                thickness: 1,
+              )
             ],
           ),
         ),
