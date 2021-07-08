@@ -258,7 +258,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                 Text("Doctors" , maxLines: 2,style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.w600, color: Color(0xff0054A3)),)
               ],
             ),
-            height: MediaQuery.of(context).size.height - 500,
+            height: MediaQuery.of(context).size.height - 550,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18.0),
               color: const Color(0xffffffff),

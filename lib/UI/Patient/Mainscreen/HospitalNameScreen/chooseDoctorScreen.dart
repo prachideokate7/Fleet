@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'DoctorNamesList.dart';
 import 'DoctorWidgets.dart';
@@ -14,11 +15,28 @@ class ChooseDoctorScreen extends StatefulWidget {
 class _ChooseDoctorScreenState extends State<ChooseDoctorScreen> {
   @override
   Widget build(BuildContext context) {
-    return
-    Container(
-        margin: EdgeInsets.fromLTRB(10, 200, 10, 10),
-        padding: EdgeInsets.all(20),
-        child: doctorList(context)
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          child: doctorList(context),
+          margin: EdgeInsets.only(top: 120),
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.bottomCenter,
+          height: MediaQuery.of(context).size.height-100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40), topLeft: Radius.circular(40)),
+            color: const Color(0xffffffff),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0x29000000),
+                offset: Offset(0, 0),
+                blurRadius: 15,
+              ),
+            ],
+          ),
+        ),
+      )
     );
   }
   doctorList(BuildContext context) {

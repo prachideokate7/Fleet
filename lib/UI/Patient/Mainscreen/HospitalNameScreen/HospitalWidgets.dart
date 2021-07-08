@@ -18,36 +18,63 @@ class HospitalWidget extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(ctx).size.width,
         padding: EdgeInsets.all(10),
-        child: Row(
+        child: Column(
           children: [
-            CircleAvatar(
-              radius: 32,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 10),
-                width: MediaQuery.of(ctx).size.width - 100,
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      doc["name"],
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: kPrimaryColor),
-                      maxLines: 1,
-                    ),
-                    Row(
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 32,
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 0),
+                    width: MediaQuery.of(ctx).size.width - 100,
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.location_pin,
-                          color: Color(0xff00355D),
+                        Container(
+                          child: Text(
+                            doc["name"],
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                                color: kPrimaryColor),
+                            maxLines: 1,
+                          ),
+                          margin: EdgeInsets.only(left: 21),
                         ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.location_pin,
+                              color: Color(0xff00355D),
+                            ),
+                            Container(
+
+                                width: 200,
+                                child: Text(
+                                  "Kolhpur maharastra 416205 nand this is the address",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: const Color(0xff0054a3),
+                                    height: 1.1363636363636365,
+                                  ),
+                                  textHeightBehavior:
+                                  TextHeightBehavior(applyHeightToFirstAscent: false),
+                                  maxLines: 2,
+                                )),
+                          ],
+                        )
                       ],
                     )
-                  ],
-                ))
+                )
+              ],
+            ),
+            Divider(
+                color: Color(0xff003358),
+              thickness: 1,
+            )
           ],
         ),
       ),

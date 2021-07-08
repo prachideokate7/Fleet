@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../constants.dart';
+
 class DoctorWidget extends StatelessWidget {
   final DocumentSnapshot doc;
   final CollectionReference collectionReference;
@@ -11,9 +13,7 @@ class DoctorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Card(
-        margin: EdgeInsets.all(15),
-        child: Container(
+      child:  Container(
           padding: EdgeInsets.all(20),
           child: Row(
             children: [
@@ -25,9 +25,16 @@ class DoctorWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        doc["name"],
-                        style: TextStyle(fontSize: 22),
+                      Container(
+                        child: Text(
+                          doc["name"],
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor),
+                          maxLines: 1,
+                        ),
+                        margin: EdgeInsets.only(left: 0),
                       ),
                       Row(
                         children: [
@@ -46,7 +53,6 @@ class DoctorWidget extends StatelessWidget {
             ],
           ),
         ),
-      ),
       onTap: () => Navigator.pushNamed(
           context, "/patientMainScreen/selectDoctor/chooseSlotScreen",
           arguments: {

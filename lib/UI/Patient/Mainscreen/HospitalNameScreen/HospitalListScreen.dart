@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled1/components/rounded_button.dart';
+
 import 'HospitalWidgets.dart';
-
-
 
 class HospitalListScreen extends StatefulWidget {
   @override
@@ -18,97 +16,102 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
   late CollectionReference collectionReference;
   bool isDrawerOpen = false;
 
-
   @override
   Widget build(BuildContext context) {
     collectionReference = FirebaseFirestore.instance.collection("hospitals");
 
     return AnimatedContainer(
       transform: Matrix4.translationValues(xOffset, yOffset, 0)
-        ..scale(scaleFactor)..rotateY(isDrawerOpen? -0.5:0),
+        ..scale(scaleFactor)
+        ..rotateY(isDrawerOpen ? -0.5 : 0),
       duration: Duration(milliseconds: 300),
       decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(isDrawerOpen?40:0.0)
-      ),
+            borderRadius: BorderRadius.all(isDrawerOpen ? Radius.circular(40) : Radius.circular(0))),
       child: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              color: Colors.grey[200],
-              height: MediaQuery.of(context).size.height,
-            ),
-            Column(
+          child: Column(
+        children: [
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      isDrawerOpen?IconButton(
+                isDrawerOpen
+                    ? IconButton(
                         icon: Icon(Icons.arrow_back_ios),
-                        onPressed: (){
+                        onPressed: () {
                           setState(() {
-                            xOffset=0;
-                            yOffset=0;
-                            scaleFactor=1;
-                            isDrawerOpen=false;
+                            xOffset = 0;
+                            yOffset = 0;
+                            scaleFactor = 1;
+                            isDrawerOpen = false;
                           });
                         },
-
-                      ): IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: () {
-                            setState(() {
-                              xOffset = 220;
-                              yOffset = 90;
-                              scaleFactor = 0.8;
-                              isDrawerOpen=true;
-                            });
-                          }),
+                      )
+                    : IconButton(
+                        icon: Icon(Icons.menu),
+                        onPressed: () {
+                          setState(() {
+                            xOffset = 230;
+                            yOffset = 150;
+                            scaleFactor = 0.6;
+                            isDrawerOpen = true;
+                          });
+                        }),
+                Container(
+                  margin: EdgeInsets.only(right: 20),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.location_pin,
+                        color: Color(0xff00355D),
+                        size: 30,
+                      ),
                       Column(
                         children: [
-                          Text('Location'),
+                          Text(
+                            'Location',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Color(0xff003358)),
+                          ),
                           Row(
                             children: [
-                              Icon(
-                                Icons.location_on,
-                                color: kPrimaryColor,
-                              ),
                               Text('Kolhapur'),
                             ],
                           ),
                         ],
                       ),
-                      CircleAvatar()
                     ],
                   ),
                 ),
-              Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                  margin: EdgeInsets.symmetric(vertical: 30,horizontal: 20),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.search),
-                      Text('Search Hospital'),
-                      Icon(Icons.settings)
-                    ],
-                  ),
-                ),
-                HospitalList(context),
+                CircleAvatar()
               ],
-            )
-          ],
-        ),
-      ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.search,
+                  color: Color(0xff003358),
+                ),
+                Text('  Search Hospital'),
+              ],
+            ),
+          ),
+          HospitalList(context),
+        ],
+      )),
     );
   }
 
@@ -118,7 +121,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
       height: MediaQuery.of(context).size.height - 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(48), topLeft: Radius.circular(48)),
+            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         color: const Color(0xffffffff),
         boxShadow: [
           BoxShadow(
@@ -132,7 +135,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
   }
 
   static bool isPortrait(context) {
-    if(MediaQuery.of(context).orientation == Orientation.portrait){
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
       return true;
     }
     return false;
@@ -154,6 +157,4 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
           return Text("Loading");
         });
   }
-
 }
-
