@@ -6,7 +6,7 @@ import 'package:untitled1/UI/Patient/Login%20and%20Signup/PatientSignupScreen.da
 import 'UI/Hospital/MainScreen/Add Slots/AddSlotsMainScreen.dart';
 import 'UI/Hospital/MainScreen/Add Slots/SelectSlotsScreen.dart';
 import 'UI/Patient/Mainscreen/HospitalNameScreen/DoctorNamesList.dart';
-import 'UI/Patient/Mainscreen/HospitalNameScreen/HospitalListScreen.dart';
+import 'UI/Patient/Mainscreen/HospitalNameScreen/chooseDoctorScreen.dart';
 import 'UI/Patient/Mainscreen/HospitalNameScreen/chooseSlotScreen.dart';
 import 'UI/choosePHScreen.dart';
 import 'UI/Hospital/Login and Signup/HospitalLoginScreen.dart';
@@ -47,6 +47,7 @@ class _MainClassState extends State<MainClass> {
         '/HospitalMainScreen/AddSlotsMainScreen/SelectSlotsScreen' : (context) =>SelectSlotsScreen(),
         '/patientMainScreen' : (context) =>PatientMainScreen(),
         '/patientMainScreen/selectDoctor' : (context) =>DoctorNamesList(),
+        '/patientMainScreen/selectDoctor/chooseDoctorScreen' : (context) =>ChooseDoctorScreen(),
         '/patientMainScreen/selectDoctor/chooseSlotScreen' : (context) =>ChooseSlotScreen(),
 
       },
