@@ -35,7 +35,6 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
             children: getListOfWid(),
           ));
     } catch (exp) {
-      print(exp.toString());
       getMapOfSlots();
     }
     return Container();
@@ -60,9 +59,12 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
             children: [Text(key.toString()), Text(value.toString())],
           ),
         ),
-        onTap: () => Navigator.pushNamed(ctx,
-            "/finalPaymentScreen",
-            arguments: {"slot" : key.toString() , "val" : value.toString() , "doc" : docref}),
+        onTap: () => Navigator.pushNamed(ctx, "/finalPaymentScreen",
+            arguments: {
+              "slot": key.toString(),
+              "val": value.toString(),
+              "doc": docref
+            }),
       );
       x++;
     });

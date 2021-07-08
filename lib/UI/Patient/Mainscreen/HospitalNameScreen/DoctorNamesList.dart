@@ -61,7 +61,6 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
             Pin(start: -18.0, end: -263.0),
             Pin(size: 335.0, start: -156.0),
             child:
-                // Adobe XD layer: 'NoPath - Copy (24)' (shape)
                 Container(
               decoration: BoxDecoration(
                 borderRadius:
