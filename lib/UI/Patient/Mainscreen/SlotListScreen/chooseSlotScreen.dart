@@ -4,7 +4,7 @@ import 'package:untitled1/components/rounded_button.dart';
 
 late DocumentSnapshot doc;
 late DocumentReference docref;
-late Map<String, dynamic> mapDoc;
+late Map<String, dynamic>? mapDoc;
 late BuildContext ctx;
 
 class ChooseSlotScreen extends StatefulWidget {
@@ -12,11 +12,14 @@ class ChooseSlotScreen extends StatefulWidget {
 
   @override
   _ChooseSlotScreenState createState() => _ChooseSlotScreenState();
+
+
+
 }
 
 class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
-  var data;
 
+  var data;
   @override
   Widget build(BuildContext context) {
     ctx = context;
@@ -25,6 +28,29 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
 
     return getAvailableSlotsList();
   }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("hasd");
+    mapDoc = null;
+  }
+
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    mapDoc = null;
+  }
+
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    mapDoc = null;
+  }
+
 
   Widget getAvailableSlotsList() {
     try {
@@ -46,10 +72,9 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
   }
 
   getListOfWid() {
-    print(data["docsnap"]["name"]);
-    List<Widget> lis = new List.filled(mapDoc.length, Container());
+    List<Widget> lis = new List.filled(mapDoc!.length, Container());
     int x = 0;
-    mapDoc.forEach((key, value) {
+    mapDoc!.forEach((key, value) {
       lis[x] = GestureDetector(
         child: Container(
           margin: EdgeInsets.all(10),
@@ -59,13 +84,15 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
             children: [Text(key.toString()), Text(value.toString())],
           ),
         ),
-        onTap: () => Navigator.pushNamed(ctx, "/finalPaymentScreen",
+        onTap: () {
+          mapDoc = null;
+          Navigator.pushNamed(ctx, "/finalPaymentScreen",
             arguments: {
               "slot": key.toString(),
               "val": value.toString(),
               "docsnap" : data["docsnap"],
               "doc": docref
-            }),
+            }); }
       );
       x++;
     });

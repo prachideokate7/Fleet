@@ -7,7 +7,7 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:untitled1/components/rounded_button.dart';
 
 late DocumentReference docRef;
-
+late BuildContext ctx;
 class FinalPaymentScreen extends StatefulWidget {
   const FinalPaymentScreen({Key? key}) : super(key: key);
 
@@ -54,7 +54,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments;
     docRef = data["doc"];
-
+    ctx = context;
     return Scaffold(
       body: Stack(
         children: [
@@ -69,7 +69,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         .set({data["slot"]: FieldValue.increment(-1)}, SetOptions(merge: true));
     Fluttertoast.showToast(msg: "Success");
 
-    addTransaction();
+    addTransaction(ctx);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -285,7 +285,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
     return "" + data["slot"] + now.year.toString() + now.month.toString() +
         now.day.toString();
   }
-  void addTransaction() {
+  void addTransaction(BuildContext context) {
     if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
       FirebaseFirestore.instance.collection("patients").doc(
           FirebaseAuth.instance.currentUser!.phoneNumber.toString()).collection(
@@ -303,6 +303,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         "hospitalemail":data["docsnap"]["email"],
         "slot" : data["slot"]
       });
+      Navigator.pushReplacementNamed(context, '/patientMainScreen');
     }
   }
 }
