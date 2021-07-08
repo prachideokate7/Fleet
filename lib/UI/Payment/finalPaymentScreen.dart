@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -67,6 +68,8 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
     docRef
         .set({data["slot"]: FieldValue.increment(-1)}, SetOptions(merge: true));
     Fluttertoast.showToast(msg: "Success");
+
+    addTransaction();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -250,7 +253,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
               Container(
                 margin: EdgeInsets.all(8),
                 child:  Text(
-                data["slot"],
+                  data["slot"],
                   style: TextStyle(
                     fontFamily: 'oswald',
                     fontWeight: FontWeight.w600,
@@ -276,5 +279,30 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         ],
       ),
     );
+  }
+  String? getDate() {
+    DateTime now = DateTime.now();
+    return "" + data["slot"] + now.year.toString() + now.month.toString() +
+        now.day.toString();
+  }
+  void addTransaction() {
+    if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
+      FirebaseFirestore.instance.collection("patients").doc(
+          FirebaseAuth.instance.currentUser!.phoneNumber.toString()).collection(
+          "bookings").doc(getDate()).set({
+        "hospitalphone" :data["docsnap"]["phone"],
+        "hospitalname" : data["docsnap"]["name"],
+        "hospitalemail":data["docsnap"]["email"],
+        "slot" : data["slot"]
+      });
+      FirebaseFirestore.instance.collection("hospitals").doc(
+          data["docsnap"]["phone"]).collection(
+          "bookings").doc(getDate()).set({
+        "phone" :FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
+        "hospitalname" : data["docsnap"]["name"],
+        "hospitalemail":data["docsnap"]["email"],
+        "slot" : data["slot"]
+      });
+    }
   }
 }

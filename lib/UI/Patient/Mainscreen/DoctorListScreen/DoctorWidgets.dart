@@ -7,8 +7,8 @@ import '../../../../constants.dart';
 class DoctorWidget extends StatelessWidget {
   final DocumentSnapshot doc;
   final CollectionReference collectionReference;
-
-  DoctorWidget(this.doc, this.collectionReference);
+  var data;
+  DoctorWidget(this.doc, this.collectionReference , this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +64,7 @@ class DoctorWidget extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
           context, "/patientMainScreen/selectDoctor/chooseSlotScreen",
           arguments: {
+            "docsnap" : data["docsnap"],
             "phone": doc["phone"],
             "doc": collectionReference
                 .doc(doc["phone"])

@@ -22,7 +22,6 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
     ctx = context;
     data = ModalRoute.of(context)!.settings.arguments;
     docref = data["doc"];
-    print(docref.toString());
 
     return getAvailableSlotsList();
   }
@@ -47,6 +46,7 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
   }
 
   getListOfWid() {
+    print(data["docsnap"]["name"]);
     List<Widget> lis = new List.filled(mapDoc.length, Container());
     int x = 0;
     mapDoc.forEach((key, value) {
@@ -63,6 +63,7 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
             arguments: {
               "slot": key.toString(),
               "val": value.toString(),
+              "docsnap" : data["docsnap"],
               "doc": docref
             }),
       );

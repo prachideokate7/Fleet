@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/components/rounded_button.dart';
 
-import 'DoctorWidgets.dart';
+import '../DoctorListScreen/DoctorWidgets.dart';
 
 late CollectionReference collectionReference;
 late String HospitalNO;
@@ -32,25 +32,6 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
     );
   }
 
-  doctorList(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.9,
-      child: StreamBuilder<QuerySnapshot>(
-          stream: collectionReference.snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final List<DocumentSnapshot> documents = snapshot.data!.docs;
-              return ListView(
-                  children: documents
-                      .map((doc) => DoctorWidget(doc, collectionReference))
-                      .toList());
-            } else if (snapshot.hasError) {
-              return Text("Something went wrong!");
-            }
-            return Text("Loading");
-          }),
-    );
-  }
 
   getBakground() {
     return Container(
@@ -60,8 +41,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
           Pinned.fromPins(
             Pin(start: -18.0, end: -263.0),
             Pin(size: 335.0, start: -156.0),
-            child:
-                Container(
+            child: Container(
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.all(Radius.elliptical(1999.0, 999.0)),
@@ -223,7 +203,6 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
   }
 
   functions() {
-
     return Container(
       child: getHospitalOptions(),
       height: MediaQuery.of(context).size.height - 400,
@@ -247,14 +226,31 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         GestureDetector(
-          onTap: ()=>Navigator.pushNamed(context, "/patientMainScreen/selectDoctor/chooseDoctorScreen"),
+          onTap: () => Navigator.pushNamed(
+              context, "/patientMainScreen/selectDoctor/chooseDoctorScreen",
+              arguments: {
+                "docsnap": data["docsnap"],
+                "phone": data["phone"],
+                "collection": collectionReference,
+              }),
           child: Container(
-            width: MediaQuery.of(context).size.width/2 - 50,
+            width: MediaQuery.of(context).size.width / 2 - 50,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.medical_services , color: Color(0xff00355D), size: 50,),
-                Text("Doctors" , maxLines: 2,style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.w600, color: Color(0xff0054A3)),)
+                Icon(
+                  Icons.medical_services,
+                  color: Color(0xff00355D),
+                  size: 50,
+                ),
+                Text(
+                  "Doctors",
+                  maxLines: 2,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff0054A3)),
+                )
               ],
             ),
             height: MediaQuery.of(context).size.height - 550,
@@ -272,12 +268,23 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width/2 - 50,
+          width: MediaQuery.of(context).size.width / 2 - 50,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(Icons.info , color: Color(0xff00355D), size: 50,),
-              Text("Info" , maxLines: 2,style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.w600, color: Color(0xff0054A3)),)
+              Icon(
+                Icons.info,
+                color: Color(0xff00355D),
+                size: 50,
+              ),
+              Text(
+                "Info",
+                maxLines: 2,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff0054A3)),
+              )
             ],
           ),
           height: MediaQuery.of(context).size.height - 550,

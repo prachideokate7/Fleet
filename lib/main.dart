@@ -5,9 +5,9 @@ import 'package:untitled1/UI/Patient/Login%20and%20Signup/PatientSignupScreen.da
 
 import 'UI/Hospital/MainScreen/Add Slots/AddSlotsMainScreen.dart';
 import 'UI/Hospital/MainScreen/Add Slots/SelectSlotsScreen.dart';
-import 'UI/Patient/Mainscreen/HospitalNameScreen/DoctorNamesList.dart';
-import 'UI/Patient/Mainscreen/HospitalNameScreen/chooseDoctorScreen.dart';
-import 'UI/Patient/Mainscreen/HospitalNameScreen/chooseSlotScreen.dart';
+import 'UI/Patient/Mainscreen/HospitalInfoScreen/DoctorNamesList.dart';
+import 'UI/Patient/Mainscreen/DoctorListScreen/chooseDoctorScreen.dart';
+import 'UI/Patient/Mainscreen/SlotListScreen/chooseSlotScreen.dart';
 import 'UI/choosePHScreen.dart';
 import 'UI/Hospital/Login and Signup/HospitalLoginScreen.dart';
 import 'UI/Hospital/MainScreen/HospitalMainScreen.dart';

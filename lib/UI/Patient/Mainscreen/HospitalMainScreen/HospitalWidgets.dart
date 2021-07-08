@@ -80,8 +80,9 @@ class HospitalWidget extends StatelessWidget {
       ),
       onTap: () => Navigator.pushNamed(
           context, "/patientMainScreen/selectDoctor", arguments: {
+         "docsnap" : doc,
         "phone": doc["phone"],
-        "collection": collectionReference
+        "collection": collectionReference,
       }),
     );
   }

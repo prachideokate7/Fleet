@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import 'HospitalNameScreen/HospitalListScreen.dart';
+import 'HospitalMainScreen/HospitalListScreen.dart';
 
 
 var ScreenNumber = 0;

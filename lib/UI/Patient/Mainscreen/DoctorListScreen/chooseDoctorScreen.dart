@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants.dart';
-import 'DoctorNamesList.dart';
 import 'DoctorWidgets.dart';
+late CollectionReference collectionReference;
 
 class ChooseDoctorScreen extends StatefulWidget {
   const ChooseDoctorScreen({Key? key}) : super(key: key);
@@ -14,8 +14,12 @@ class ChooseDoctorScreen extends StatefulWidget {
 }
 
 class _ChooseDoctorScreenState extends State<ChooseDoctorScreen> {
+  var data;
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context)!.settings.arguments;
+    print(data["docsnap"]);
+    collectionReference = data["collection"];
     return Scaffold(
         body: SingleChildScrollView(
       child: Container(
@@ -73,7 +77,7 @@ class _ChooseDoctorScreenState extends State<ChooseDoctorScreen> {
                   final List<DocumentSnapshot> documents = snapshot.data!.docs;
                   return ListView(
                       children: documents
-                          .map((doc) => DoctorWidget(doc, collectionReference))
+                          .map((doc) => DoctorWidget(doc, collectionReference , data))
                           .toList());
                 } else if (snapshot.hasError) {
                   return Text("Something went wrong!");
