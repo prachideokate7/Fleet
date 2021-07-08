@@ -273,6 +273,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
           ),
         ),
         Container(
+          width: MediaQuery.of(context).size.width/2 - 50,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -280,7 +281,6 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
               Text("Info" , maxLines: 2,style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.w600, color: Color(0xff0054A3)),)
             ],
           ),
-          width: MediaQuery.of(context).size.width/2 - 50,
           height: MediaQuery.of(context).size.height - 550,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18.0),
