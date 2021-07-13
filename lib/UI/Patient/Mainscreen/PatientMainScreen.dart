@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/UI/Patient/ShowHistory/ShowHistroy.dart';
 
 import '../../../constants.dart';
 import 'HospitalMainScreen/HospitalListScreen.dart';
@@ -18,7 +19,7 @@ class PatientMainScreen extends StatefulWidget {
 class _PatientMainScreenState extends State<PatientMainScreen> {
   List<StatefulWidget> list = [
     HospitalListScreen(),
-    HospitalListScreen(),
+    ShowHistory(),
     HospitalListScreen(),
   ];
 
@@ -132,12 +133,12 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
 List<Map> drawerItems=[
   {
     'icon': Icons.info,
-    'title' : 'Info',
+    'title' : 'Hospitals',
     'screenNumber' : 0
   },
   {
     'icon': Icons.add_box_rounded,
-    'title' : 'Add Slots',
+    'title' : 'Appointments',
     'screenNumber' : 1
   },
   {
