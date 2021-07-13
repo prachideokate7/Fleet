@@ -172,7 +172,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                       width: 200,
                       margin: EdgeInsets.only(left: 8),
                       child: Text(
-                        "+918668611930",
+                        "8668611930",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,

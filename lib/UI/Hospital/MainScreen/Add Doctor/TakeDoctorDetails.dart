@@ -41,14 +41,14 @@ class _TakeDoctorDetailsState extends State<TakeDoctorDetails> {
 
   void addDoctorToDatabase() {
     String str = FirebaseAuth.instance.currentUser!.phoneNumber.toString();
-    String pn = "+91"+phoneNo.text;
+    String pn = phoneNo.text;
 
     FirebaseFirestore.instance
         .collection("hospitals")
         .doc(str)
         .collection("doctors")
         .doc(pn)
-        .set({"phone": "+91"+phoneNo.text , "name" : doctorName.text , "degree" : degree.text  , "email" : email.text , "experience" : experience.text , "department" : department.text });
+        .set({"phone": phoneNo.text , "name" : doctorName.text , "degree" : degree.text  , "email" : email.text , "experience" : experience.text , "department" : department.text });
     doctorName.clear();
     degree.clear();
     phoneNo.clear();

@@ -40,7 +40,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
       'amount': 10000,
       'name': 'Elite',
       'description': 'Slot booking',
-      'prefill': {'contact': '8668611930', 'email': 'ydhanlobhe1930@gmail.com'}
+      'prefill': {'contact': '+918668611930', 'email': 'ydhanlobhe1930@gmail.com'}
     };
 
     _razorpay.open(options);

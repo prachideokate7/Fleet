@@ -25,7 +25,7 @@ class _PatientLoginScreenState extends State<HospitalSignupScreen> {
   String otp = "";
 
   void checkPhoneNumberAndSendOTP() {
-    if (phoneNumberController.text.length == 10) {
+    if (phoneNumberController.text.length == 13) {
       EasyLoading.show(
           status: 'Sending OTP...',
           dismissOnTap: true);
@@ -42,7 +42,7 @@ class _PatientLoginScreenState extends State<HospitalSignupScreen> {
     // if (!kIsWeb) {
     if (true) {
       await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: "+91" + phoneNumber,
+        phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {
           Fluttertoast.showToast(msg: e.toString());
@@ -56,7 +56,7 @@ class _PatientLoginScreenState extends State<HospitalSignupScreen> {
       );
     } else {
       ConfirmationResult confirmationResult = await FirebaseAuth.instance
-          .signInWithPhoneNumber("+91" + phoneNumber);
+          .signInWithPhoneNumber(phoneNumber);
       if (confirmationResult.verificationId != null) {
         this.verificationId = confirmationResult.verificationId;
         EasyLoading.showSuccess('OTP sent!');
@@ -187,7 +187,7 @@ class _PatientLoginScreenState extends State<HospitalSignupScreen> {
       {required String phoneNumber, String email = "", required String name, required String password}) {
     FirebaseFirestore.instance
         .collection("hospitals")
-        .doc("+91"+phoneNumber)
-        .set({"phone": "+91"+phoneNumber , "name" : name , "password" : password  , "email" : email });
+        .doc(phoneNumber)
+        .set({"phone": phoneNumber , "name" : name , "password" : password  , "email" : email });
   }
 }
