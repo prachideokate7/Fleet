@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/UI/Hospital/MainScreen/BookedSlots/BookedSlots.dart';
 
 import '../../../constants.dart';
 import 'Add Slots/MainScreen.dart';
@@ -25,6 +26,7 @@ class _PatientMainScreenState extends State<HospitalMainScreen> {
     HomeScreen(),
     AddSlotsScreen(),
     AddDoctorScreen(),
+    BookedSlots()
   ];
 
   @override
@@ -137,3 +139,34 @@ class _PatientMainScreenState extends State<HospitalMainScreen> {
     );
   }
 }
+
+List<Map> drawerItems=[
+{
+'icon': Icons.info,
+'title' : 'Info',
+'screenNumber' : 0
+},
+{
+'icon': Icons.add_box_rounded,
+'title' : 'Add Slots',
+'screenNumber' : 1
+},
+{
+'icon': Icons.medical_services,
+'title' : 'Add Doctor',
+'screenNumber' : 2
+},
+{
+'icon': Icons.favorite,
+'title' : 'Bookings',
+'screenNumber' : 3
+},
+{
+'icon': Icons.mail,
+'title' : 'Messages'
+},
+{
+'icon': Icons.ac_unit,
+'title' : 'Profile'
+}
+];
