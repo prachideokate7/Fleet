@@ -8,7 +8,7 @@ import '../DoctorListScreen/DoctorWidgets.dart';
 
 late CollectionReference collectionReference;
 late String HospitalNO;
-
+late DocumentSnapshot doc;
 class DoctorNamesList extends StatefulWidget {
   const DoctorNamesList({Key? key}) : super(key: key);
 
@@ -23,6 +23,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments;
     collectionReference = data["collection"];
+    doc = data["docsnap"];
     collectionReference =
         collectionReference.doc(data["phone"]).collection("doctors");
     return Scaffold(
@@ -76,7 +77,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
             Container(
               margin: EdgeInsets.all(3),
               child: Text(
-                'Apple Hospital Limited and the notheing asd asdfasflkj',
+                doc["name"],
                 style: TextStyle(
                   fontFamily: 'Oswald',
                   fontSize: 30,
@@ -94,7 +95,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
             Container(
               margin: EdgeInsets.all(3),
               child: Text(
-                "- " + "Brain Specialist ",
+                "- " + doc["category"],
                 style: TextStyle(
                   fontFamily: 'Oswald',
                   fontSize: 15,
@@ -120,7 +121,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                       margin: EdgeInsets.only(left: 8),
                       width: 200,
                       child: Text(
-                        "Kolhpur maharastra 416205 nand this is the address",
+                        doc["address"],
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
@@ -146,7 +147,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                       width: 200,
                       margin: EdgeInsets.only(left: 8),
                       child: Text(
-                        "ydhalobhe1930@gmail.com",
+                        doc["email"],
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -172,7 +173,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                       width: 200,
                       margin: EdgeInsets.only(left: 8),
                       child: Text(
-                        "8668611930",
+                        doc["phone"],
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
@@ -185,9 +186,27 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                       ),
                     ),
                   ],
-                ))
+                )
+            ),
+            Container(
+              width: 200,
+              margin: EdgeInsets.only(left: 8),
+              child: Text(
+                getIsCovid(doc["iscovid"]),
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  color: const Color(0xff0054a3),
+                  height: 1.1363636363636365,
+                ),
+                textHeightBehavior:
+                TextHeightBehavior(applyHeightToFirstAscent: false),
+                maxLines: 2,
+              ),
+            ),
           ],
-        ));
+        )
+    );
   }
 
   getFronted() {
@@ -232,6 +251,7 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
                 "docsnap": data["docsnap"],
                 "phone": data["phone"],
                 "collection": collectionReference,
+                "userdata" : data["userdata"]
               }),
           child: Container(
             width: MediaQuery.of(context).size.width / 2 - 50,
@@ -302,5 +322,9 @@ class _DoctorNamesListState extends State<DoctorNamesList> {
         )
       ],
     );
+  }
+
+  String getIsCovid(bool iss) {
+    return iss? "Covid Hospital":"Not a Covid Hospital";
   }
 }

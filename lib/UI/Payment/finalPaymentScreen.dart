@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:untitled1/UI/Patient/Mainscreen/HospitalMainScreen/HospitalListScreen.dart';
 import 'package:untitled1/components/rounded_button.dart';
 
 late DocumentReference docRef;
@@ -54,6 +55,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments;
     docRef = data["doc"];
+    print("yd" + data["doctor"]["name"]);
     ctx = context;
     return Scaffold(
       body: Stack(
@@ -69,7 +71,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         .set({data["slot"]: FieldValue.increment(-1)}, SetOptions(merge: true));
     Fluttertoast.showToast(msg: "Success");
 
-    addTransaction(ctx);
+    addTransaction(ctx ,response);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -143,7 +145,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
                         margin: EdgeInsets.all(5),
                         width: MediaQuery.of(context).size.width - 150,
                         child: Text(
-                          "Apple Hospital asdfkas  lasjfk klasjdfklj alksjd",
+                          data["docsnap"]["name"],
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
@@ -166,7 +168,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
                               Container(
                                 width: MediaQuery.of(context).size.width-200,
                                 child: Text(
-                                  "Kolhpur maharastra 416205 nand this is the address",
+                                  data["docsnap"]["address"],
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
@@ -265,7 +267,8 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
                   TextHeightBehavior(applyHeightToFirstAscent: false),
                   maxLines: 2,
                 ),
-              )
+              ),
+
             ],
           ),
           Divider(
@@ -285,23 +288,34 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
     return "" + data["slot"] + now.year.toString() + now.month.toString() +
         now.day.toString();
   }
-  void addTransaction(BuildContext context) {
+  void addTransaction(BuildContext context ,PaymentSuccessResponse res) {
+
     if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
       FirebaseFirestore.instance.collection("patients").doc(
           FirebaseAuth.instance.currentUser!.phoneNumber.toString()).collection(
           "bookings").doc(getDate()).set({
-        "hospitalphone" :data["docsnap"]["phone"],
+        "hospitalphone": data["docsnap"]["phone"],
         "hospitalname" : data["docsnap"]["name"],
-        "hospitalemail":data["docsnap"]["email"],
-        "slot" : data["slot"]
+        "hospitalemail": data["docsnap"]["email"],
+        "patientname"  : data["userdata"]["name"],
+        "doctorname"   : data["doctor"]["name"],
+        "fees"         : "100",
+        "transid"      : res.paymentId.toString(),
+        "disease"      : "des",
+        "slot"         : data["slot"]
       });
       FirebaseFirestore.instance.collection("hospitals").doc(
           data["docsnap"]["phone"]).collection(
           "bookings").doc(getDate()).set({
-        "phone" :FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
+        "hospitalphone": data["docsnap"]["phone"],
         "hospitalname" : data["docsnap"]["name"],
-        "hospitalemail":data["docsnap"]["email"],
-        "slot" : data["slot"]
+        "hospitalemail": data["docsnap"]["email"],
+        "patientname"  : data["userdata"]["name"],
+        "doctorname"   : data["doctor"]["name"],
+        "fees"         : "100",
+        "transid"      : "id",
+        "disease"      : "des",
+        "slot"         : data["slot"]
       });
       Navigator.pushReplacementNamed(context, '/patientMainScreen');
     }

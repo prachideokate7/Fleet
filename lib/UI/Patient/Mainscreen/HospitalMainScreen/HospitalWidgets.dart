@@ -8,8 +8,8 @@ late BuildContext ctx;
 class HospitalWidget extends StatelessWidget {
   final DocumentSnapshot doc;
   final CollectionReference collectionReference;
-
-  HospitalWidget(this.doc, this.collectionReference);
+   var userdata;
+  HospitalWidget(this.doc, this.collectionReference, this.userdata);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class HospitalWidget extends StatelessWidget {
 
                                 width: 200,
                                 child: Text(
-                                  "Kolhpur maharastra 416205 nand this is the address",
+                                  doc["address"],
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
@@ -83,6 +83,7 @@ class HospitalWidget extends StatelessWidget {
          "docsnap" : doc,
         "phone": doc["phone"],
         "collection": collectionReference,
+        "userdata" : userdata
       }),
     );
   }

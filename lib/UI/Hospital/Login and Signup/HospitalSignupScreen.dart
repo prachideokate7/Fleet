@@ -29,7 +29,7 @@ class _PatientLoginScreenState extends State<HospitalSignupScreen> {
   String otp = "";
 
   void checkPhoneNumberAndSendOTP() {
-    if (phoneNumberController.text.length == 13) {
+    if (phoneNumberController.text.length > 11) {
       EasyLoading.show(status: 'Sending OTP...', dismissOnTap: true);
       sentOTP(phoneNumberController.text);
     } else {

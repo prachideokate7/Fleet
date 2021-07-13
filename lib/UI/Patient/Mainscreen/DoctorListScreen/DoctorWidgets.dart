@@ -64,12 +64,14 @@ class DoctorWidget extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
           context, "/patientMainScreen/selectDoctor/chooseSlotScreen",
           arguments: {
+            "doctor" : doc,
             "docsnap" : data["docsnap"],
             "phone": doc["phone"],
             "doc": collectionReference
                 .doc(doc["phone"])
                 .collection("slots")
                 .doc(getTodayData()),
+            "userdata" : data["userdata"]
           }),
     );
   }

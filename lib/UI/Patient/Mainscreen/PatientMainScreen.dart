@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'HospitalMainScreen/HospitalListScreen.dart';
 
 
 var ScreenNumber = 0;
+late var documentSnapshot;
 
 class PatientMainScreen extends StatefulWidget {
   const PatientMainScreen({Key? key}) : super(key: key);
@@ -17,22 +19,29 @@ class PatientMainScreen extends StatefulWidget {
 }
 
 class _PatientMainScreenState extends State<PatientMainScreen> {
-  List<StatefulWidget> list = [
-    HospitalListScreen(),
-    ShowHistory(),
-    HospitalListScreen(),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          getDrawer(),
-          list[ScreenNumber],
-        ],
-      ),
+
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("patients").doc(FirebaseAuth.instance.currentUser!.phoneNumber).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+          documentSnapshot = snapshot.data;
+          return  Scaffold(
+            body: Stack(
+              children: [
+                getDrawer(),
+                list[ScreenNumber],
+              ],
+            ),
+          );
+        }
     );
+
+
   }
 
   getDrawer() {
@@ -52,11 +61,11 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Yash Dhanlobhe',
+                    documentSnapshot["name"] ,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
-                  Text('8668611930',
+                  Text(documentSnapshot["phone"],
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold))
                 ],
@@ -129,6 +138,7 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
       ),
     );
   }
+
 }
 List<Map> drawerItems=[
   {
@@ -158,4 +168,11 @@ List<Map> drawerItems=[
   //   'icon': Icons.ac_unit,
   //   'title' : 'Profile'
   // },
+];
+
+
+List<StatefulWidget> list = [
+  HospitalListScreen(documentSnapshot),
+  ShowHistory(),
+  HospitalListScreen(documentSnapshot),
 ];

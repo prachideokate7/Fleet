@@ -17,22 +17,20 @@ class PatientSignupScreen extends StatefulWidget {
 
 class _PatientLoginScreenState extends State<PatientSignupScreen> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController OTPController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
   String verificationId = "";
   String otp = "";
 
   void checkPhoneNumberAndSendOTP() {
-    if (phoneNumberController.text.length == 13) {
+    if (phoneNumberController.text.length > 11) {
       EasyLoading.show(
           status: 'Sending OTP...',
-          maskType: EasyLoadingMaskType.custom,
           dismissOnTap: true);
       sentOTP(phoneNumberController.text);
     } else {
-      Fluttertoast.showToast(msg: "invalid number");
       EasyLoading.showError(
         'Enter Valid Number',
       );
@@ -42,23 +40,30 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
   Future<void> sentOTP(String phoneNumber) async {
     // if (!kIsWeb) {
     if (true) {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {
-          Fluttertoast.showToast(msg: e.toString());
-          print("yash" + e.toString());
-        },
-        codeSent: (String verificationId, int? resendToken) {
-          Fluttertoast.showToast(msg: "code sent!");
+      if(!(await isAccountThere(phoneNumber))){
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) {},
+          verificationFailed: (FirebaseAuthException e) {
+            Fluttertoast.showToast(msg: e.toString());
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            EasyLoading.showSuccess(
+              'Code Send',
+            );
 
-          this.verificationId = verificationId;
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
+            this.verificationId = verificationId;
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+      }else{
+        EasyLoading.showError(
+          'Account is already present',
+        );
+      }
     } else {
-      ConfirmationResult confirmationResult = await FirebaseAuth.instance
-          .signInWithPhoneNumber(phoneNumber);
+      ConfirmationResult confirmationResult =
+          await FirebaseAuth.instance.signInWithPhoneNumber(phoneNumber);
       if (confirmationResult.verificationId != null) {
         this.verificationId = confirmationResult.verificationId;
         EasyLoading.showSuccess('OTP sent!');
@@ -68,6 +73,7 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
       }
     }
   }
+
   void verifyOTP() async {
     if (verificationId == null || OTPController.text == "") {
       EasyLoading.showError(
@@ -81,9 +87,13 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
           verificationId: verificationId, smsCode: OTPController.text);
 
       UserCredential user =
-      await FirebaseAuth.instance.signInWithCredential(credential);
+          await FirebaseAuth.instance.signInWithCredential(credential);
       if (user != null) {
-        addSignUpData(name: fullNameController.text , password: passwordController.text , phoneNumber: phoneNumberController.text , email: emailController.text);
+        addSignUpData(
+            name: fullNameController.text,
+            phoneNumber: phoneNumberController.text,
+            email: emailController.text,
+            address: addressController.text);
         EasyLoading.showToast("Logged in successfully.",
             toastPosition: EasyLoadingToastPosition.bottom);
         Navigator.pushReplacementNamed(context, '/patientMainScreen');
@@ -92,6 +102,7 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,13 +129,18 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
                 height: MediaQuery.of(context).size.height * 0.15,
               ),
               ElevatedButton(
-                onPressed: (){},
-                child: Icon(Icons.camera_alt, color: kPrimaryColor ,size: 60,),
+                onPressed: () {},
+                child: Icon(
+                  Icons.camera_alt,
+                  color: kPrimaryColor,
+                  size: 60,
+                ),
                 style: ElevatedButton.styleFrom(
                   elevation: 8,
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(15),
-                  primary: Colors.white, // <-- Button color
+                  primary: Colors.white,
+                  // <-- Button color
                   onPrimary: Colors.red, // <-- Splash color
                 ),
               ),
@@ -141,20 +157,19 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
                       icon: Icons.email,
                     ),
                     RoundedInputField(
+                      controller: addressController,
+                      hintText: "Address",
+                      icon: Icons.location_pin,
+                    ),
+                    RoundedInputField(
                       controller: phoneNumberController,
                       hintText: 'Phone Number',
                       icon: Icons.phone,
                     ),
                     RoundedInputField(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      icon: Icons.lock,
-                    ),
-                    RoundedInputField(
                         controller: OTPController,
                         hintText: "OTP",
-                        icon: Icons.verified_user
-                    ),
+                        icon: Icons.verified_user),
                     RoundedButton(
                       text: "Send OTP",
                       press: checkPhoneNumberAndSendOTP,
@@ -186,10 +201,22 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
   }
 
   void addSignUpData(
-      {required String phoneNumber, String email = "", required String name, required String password}) {
-    FirebaseFirestore.instance
-        .collection("patients")
-        .doc(phoneNumber)
-        .set({"phone": phoneNumber , "name" : name , "password" : password  , "email" : email });
+      {required String phoneNumber,
+      String email = "",
+      required String name,
+      String address = ""}) {
+    FirebaseFirestore.instance.collection("patients").doc(phoneNumber).set({
+      "phone": phoneNumber,
+      "name": name,
+      "email": email,
+      "address": address
+    });
+  }
+  Future<bool> isAccountThere(String phoneNumber) async {
+    var doc = await FirebaseFirestore.instance.collection("patients").doc(phoneNumber).get();
+    if(doc.exists){
+      return true;
+    }
+    return false;
   }
 }

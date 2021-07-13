@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:untitled1/components/rounded_button.dart';
 import 'package:untitled1/components/rounded_input_field.dart';
 
@@ -15,9 +16,9 @@ class TakeDoctorDetails extends StatefulWidget {
 
 class _TakeDoctorDetailsState extends State<TakeDoctorDetails> {
   TextEditingController doctorName = TextEditingController();
-  TextEditingController degree = TextEditingController();
-  TextEditingController phoneNo = TextEditingController();
-  TextEditingController email = TextEditingController();
+  TextEditingController degree =     TextEditingController();
+  TextEditingController phoneNo =    TextEditingController();
+  TextEditingController email      = TextEditingController();
   TextEditingController department = TextEditingController();
   TextEditingController experience = TextEditingController();
 
@@ -49,11 +50,14 @@ class _TakeDoctorDetailsState extends State<TakeDoctorDetails> {
         .collection("doctors")
         .doc(pn)
         .set({"phone": phoneNo.text , "name" : doctorName.text , "degree" : degree.text  , "email" : email.text , "experience" : experience.text , "department" : department.text });
+
     doctorName.clear();
     degree.clear();
     phoneNo.clear();
     email.clear();
     department.clear();
     experience.clear();
+
+    Fluttertoast.showToast(msg: "Doctor Details Added");
   }
 }

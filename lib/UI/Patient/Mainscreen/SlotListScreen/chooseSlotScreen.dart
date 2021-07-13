@@ -91,8 +91,11 @@ class _ChooseSlotScreenState extends State<ChooseSlotScreen> {
               "slot": key.toString(),
               "val": value.toString(),
               "docsnap" : data["docsnap"],
-              "doc": docref
-            }); }
+              "doc": docref,
+              "userdata":data["userdata"],
+              "doctor" : data["doctor"]
+            });
+        }
       );
       x++;
     });
