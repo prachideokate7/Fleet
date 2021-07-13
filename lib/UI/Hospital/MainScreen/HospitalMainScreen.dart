@@ -4,17 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:untitled1/UI/Hospital/MainScreen/BookedSlots/BookedSlots.dart';
 
 import '../../../constants.dart';
+import 'Add Doctor/AddDoctorScreen.dart';
 import 'Add Slots/MainScreen.dart';
 import 'Info/hospitalInfoScreen.dart';
-import 'configuration.dart';
-import 'Add Doctor/AddDoctorScreen.dart';
-
 
 var ScreenNumber = 0;
 
 class HospitalMainScreen extends StatefulWidget {
-
-
   const HospitalMainScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,7 +27,6 @@ class _PatientMainScreenState extends State<HospitalMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         children: [
@@ -140,33 +135,11 @@ class _PatientMainScreenState extends State<HospitalMainScreen> {
   }
 }
 
-List<Map> drawerItems=[
-{
-'icon': Icons.info,
-'title' : 'Info',
-'screenNumber' : 0
-},
-{
-'icon': Icons.add_box_rounded,
-'title' : 'Add Slots',
-'screenNumber' : 1
-},
-{
-'icon': Icons.medical_services,
-'title' : 'Add Doctor',
-'screenNumber' : 2
-},
-{
-'icon': Icons.favorite,
-'title' : 'Bookings',
-'screenNumber' : 3
-},
-{
-'icon': Icons.mail,
-'title' : 'Messages'
-},
-{
-'icon': Icons.ac_unit,
-'title' : 'Profile'
-}
+List<Map> drawerItems = [
+  {'icon': Icons.info, 'title': 'Info', 'screenNumber': 0},
+  {'icon': Icons.add_box_rounded, 'title': 'Add Slots', 'screenNumber': 1},
+  {'icon': Icons.medical_services, 'title': 'Add Doctor', 'screenNumber': 2},
+  {'icon': Icons.favorite, 'title': 'Bookings', 'screenNumber': 3},
+  // {'icon': Icons.mail, 'title': 'Messages'},
+  // {'icon': Icons.ac_unit, 'title': 'Profile'}
 ];

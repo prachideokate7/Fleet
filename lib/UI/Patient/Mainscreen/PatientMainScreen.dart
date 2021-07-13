@@ -141,21 +141,21 @@ List<Map> drawerItems=[
     'title' : 'Appointments',
     'screenNumber' : 1
   },
-  {
-    'icon': Icons.medical_services,
-    'title' : 'Add Doctor',
-    'screenNumber' : 2
-  },
-  {
-    'icon': Icons.favorite,
-    'title' : 'Favorites'
-  },
-  {
-    'icon': Icons.mail,
-    'title' : 'Messages'
-  },
-  {
-    'icon': Icons.ac_unit,
-    'title' : 'Profile'
-  },
+  // {
+  //   'icon': Icons.medical_services,
+  //   'title' : 'Add Doctor',
+  //   'screenNumber' : 2
+  // },
+  // {
+  //   'icon': Icons.favorite,
+  //   'title' : 'Favorites'
+  // },
+  // {
+  //   'icon': Icons.mail,
+  //   'title' : 'Messages'
+  // },
+  // {
+  //   'icon': Icons.ac_unit,
+  //   'title' : 'Profile'
+  // },
 ];

@@ -30,7 +30,6 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
           dismissOnTap: true);
       sentOTP(phoneNumberController.text);
     } else {
-      Fluttertoast.showToast(msg: "invalid number");
       EasyLoading.showError(
         'Enter Valid Number',
       );
@@ -40,19 +39,23 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
   Future<void> sentOTP(String phoneNumber) async {
     // if (!kIsWeb) {
     if (true) {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {
-          Fluttertoast.showToast(msg: e.toString());
-        },
-        codeSent: (String verificationId, int? resendToken) {
-          Fluttertoast.showToast(msg: "code sent!");
+      if(await isAccountThere(phoneNumber)){
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) {},
+          verificationFailed: (FirebaseAuthException e) {
+            Fluttertoast.showToast(msg: e.toString());
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            EasyLoading.showSuccess(
+              'Code Send!',
+            );
 
-          this.verificationId = verificationId;
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
+            this.verificationId = verificationId;
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+      }
     } else {
       ConfirmationResult confirmationResult = await FirebaseAuth.instance
           .signInWithPhoneNumber(phoneNumber);
@@ -179,5 +182,13 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
       pd = new PatientData(password: "", name: "", phone: "", email: "");
     }
     return pd;
+  }
+
+  Future<bool> isAccountThere(String phoneNumber) async {
+    var doc = await FirebaseFirestore.instance.collection("patients").doc(phoneNumber).get();
+    if(doc.exists){
+      return true;
+    }
+    return false;
   }
 }

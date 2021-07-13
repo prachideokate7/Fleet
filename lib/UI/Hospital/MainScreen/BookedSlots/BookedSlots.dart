@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled1/UI/Hospital/MainScreen/BookedSlots/SlotBookedWidget.dart';
 
-
 late CollectionReference collectionReference;
 
 class BookedSlots extends StatefulWidget {
@@ -19,10 +18,13 @@ class _BookedSlotsState extends State<BookedSlots> {
   double yOffset = 0;
   double scaleFactor = 1;
   bool isDrawerOpen = false;
+
   @override
   Widget build(BuildContext context) {
-    collectionReference = FirebaseFirestore.instance.collection("patients").doc(
-        FirebaseAuth.instance.currentUser!.phoneNumber.toString()).collection("bookings");
+    collectionReference = FirebaseFirestore.instance
+        .collection("patients")
+        .doc(FirebaseAuth.instance.currentUser!.phoneNumber.toString())
+        .collection("bookings");
     return AnimatedContainer(
       transform: Matrix4.translationValues(xOffset, yOffset, 0)
         ..scale(scaleFactor)
@@ -30,7 +32,8 @@ class _BookedSlotsState extends State<BookedSlots> {
       duration: Duration(milliseconds: 300),
       decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.all(isDrawerOpen ? Radius.circular(40) : Radius.circular(0))),
+          borderRadius: BorderRadius.all(
+              isDrawerOpen ? Radius.circular(40) : Radius.circular(0))  ),
       child: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -45,26 +48,26 @@ class _BookedSlotsState extends State<BookedSlots> {
                   children: [
                     isDrawerOpen
                         ? IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        setState(() {
-                          xOffset = 0;
-                          yOffset = 0;
-                          scaleFactor = 1;
-                          isDrawerOpen = false;
-                        });
-                      },
-                    )
+                            icon: Icon(Icons.arrow_back_ios),
+                            onPressed: () {
+                              setState(() {
+                                xOffset = 0;
+                                yOffset = 0;
+                                scaleFactor = 1;
+                                isDrawerOpen = false;
+                              });
+                            },
+                          )
                         : IconButton(
-                        icon: Icon(Icons.menu),
-                        onPressed: () {
-                          setState(() {
-                            xOffset = 230;
-                            yOffset = 150;
-                            scaleFactor = 0.6;
-                            isDrawerOpen = true;
-                          });
-                        }),
+                            icon: Icon(Icons.menu),
+                            onPressed: () {
+                              setState(() {
+                                xOffset = 230;
+                                yOffset = 150;
+                                scaleFactor = 0.6;
+                                isDrawerOpen = true;
+                              });
+                            }),
                     Text("Appointment"),
                     CircleAvatar()
                   ],
@@ -82,10 +85,7 @@ class _BookedSlotsState extends State<BookedSlots> {
     return Column(
       children: [
         Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height - 100,
+          height: MediaQuery.of(context).size.height - 100,
           child: StreamBuilder<QuerySnapshot>(
               stream: collectionReference.snapshots(),
               builder: (context, snapshot) {
@@ -94,7 +94,7 @@ class _BookedSlotsState extends State<BookedSlots> {
                   return ListView(
                       children: documents
                           .map((doc) =>
-                          SlotBookedWidget(doc, collectionReference))
+                              SlotBookedWidget(doc, collectionReference))
                           .toList());
                 } else if (snapshot.hasError) {
                   return Text("Something went wrong!");

@@ -33,7 +33,8 @@ class _AddSlotsScreenState extends State<AddSlotsScreen> {
 
       decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)
+          borderRadius: BorderRadius.all(
+              isDrawerOpen ? Radius.circular(40) : Radius.circular(0))
       ),
       child: SingleChildScrollView(
         child: Stack(

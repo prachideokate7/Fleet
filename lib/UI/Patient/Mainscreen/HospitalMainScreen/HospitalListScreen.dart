@@ -27,7 +27,8 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
       duration: Duration(milliseconds: 300),
       decoration: BoxDecoration(
           color: Colors.grey[200],
-            borderRadius: BorderRadius.all(isDrawerOpen ? Radius.circular(40) : Radius.circular(0))),
+          borderRadius: BorderRadius.all(
+              isDrawerOpen ? Radius.circular(40) : Radius.circular(0))),
       child: SingleChildScrollView(
           child: Column(
         children: [

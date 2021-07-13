@@ -25,7 +25,8 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
       duration: Duration(milliseconds: 300),
       decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(isDrawerOpen?40:0.0)
+          borderRadius: BorderRadius.all(
+              isDrawerOpen ? Radius.circular(40) : Radius.circular(0))
       ),
       child: SingleChildScrollView(
         child: Stack(

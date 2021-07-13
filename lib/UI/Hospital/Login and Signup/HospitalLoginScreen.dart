@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:untitled1/UI/Hospital/HospitalData.dart';
-import 'package:untitled1/UI/Patient/PatienData.dart';
 import 'package:untitled1/components/rounded_button.dart';
 import 'package:untitled1/components/rounded_input_field.dart';
 
@@ -32,7 +30,6 @@ class _PatientLoginScreenState extends State<HospitalLoginScreen> {
           dismissOnTap: true);
       sentOTP(phoneNumberController.text);
     } else {
-      Fluttertoast.showToast(msg: "invalid number");
       EasyLoading.showError(
         'Enter Valid Number',
       );
@@ -42,19 +39,27 @@ class _PatientLoginScreenState extends State<HospitalLoginScreen> {
   Future<void> sentOTP(String phoneNumber) async {
     // if (!kIsWeb) {
     if (true) {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {
-          Fluttertoast.showToast(msg: e.toString());
-        },
-        codeSent: (String verificationId, int? resendToken) {
-          Fluttertoast.showToast(msg: "code sent!");
+      if(await isAccountThere(phoneNumber)){
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) {},
+          verificationFailed: (FirebaseAuthException e) {
+            Fluttertoast.showToast(msg: e.toString());
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            EasyLoading.showSuccess(
+              'OTP Sent',
+            );
 
-          this.verificationId = verificationId;
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
+            this.verificationId = verificationId;
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+      }else{
+        EasyLoading.showError(
+          'Account is Not Present',
+        );
+      }
     } else {
       ConfirmationResult confirmationResult = await FirebaseAuth.instance
           .signInWithPhoneNumber( phoneNumber);
@@ -156,6 +161,14 @@ class _PatientLoginScreenState extends State<HospitalLoginScreen> {
 
   bool isPortrait(context) {
     if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> isAccountThere(String phoneNumber) async {
+    var doc = await FirebaseFirestore.instance.collection("hospitals").doc(phoneNumber).get();
+    if(doc.exists){
       return true;
     }
     return false;
