@@ -13,6 +13,7 @@ class HistoryAppointmentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child:  Container(
+        width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
@@ -60,16 +61,11 @@ class HistoryAppointmentWidget extends StatelessWidget {
           ],
         ),
       ),
-      // onTap: () => Navigator.pushNamed(
-      //     context, "/patientMainScreen/selectDoctor/chooseSlotScreen",
-      //     arguments: {
-      //       "docsnap" : data["docsnap"],
-      //       "phone": doc["phone"],
-      //       "doc": collectionReference
-      //           .doc(doc["phone"])
-      //           .collection("slots")
-      //           .doc(getTodayData()),
-      //     }),
+      onTap: () => Navigator.pushNamed(
+          context, "/patientMainScreen/bookingsDetails",
+          arguments: {
+              "doc" : doc
+          }),
     );
   }
 

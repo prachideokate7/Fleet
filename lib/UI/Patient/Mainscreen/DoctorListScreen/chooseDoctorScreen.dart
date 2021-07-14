@@ -18,7 +18,6 @@ class _ChooseDoctorScreenState extends State<ChooseDoctorScreen> {
   @override
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments;
-    print(data["docsnap"]);
     collectionReference = data["collection"];
     return Scaffold(
         body: SingleChildScrollView(

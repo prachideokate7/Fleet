@@ -60,16 +60,11 @@ class SlotBookedWidget extends StatelessWidget {
           ],
         ),
       ),
-      // onTap: () => Navigator.pushNamed(
-      //     context, "/patientMainScreen/selectDoctor/chooseSlotScreen",
-      //     arguments: {
-      //       "docsnap" : data["docsnap"],
-      //       "phone": doc["phone"],
-      //       "doc": collectionReference
-      //           .doc(doc["phone"])
-      //           .collection("slots")
-      //           .doc(getTodayData()),
-      //     }),
+      onTap: () => Navigator.pushNamed(
+          context, '/HospitalMainScreen/bookingsDetails',
+          arguments: {
+            "doc" : doc
+          }),
     );
   }
 

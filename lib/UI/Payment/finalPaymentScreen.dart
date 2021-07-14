@@ -298,6 +298,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         "hospitalname" : data["docsnap"]["name"],
         "hospitalemail": data["docsnap"]["email"],
         "patientname"  : data["userdata"]["name"],
+        "patientphone" : FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
         "doctorname"   : data["doctor"]["name"],
         "fees"         : "100",
         "transid"      : res.paymentId.toString(),
@@ -307,6 +308,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
       FirebaseFirestore.instance.collection("hospitals").doc(
           data["docsnap"]["phone"]).collection(
           "bookings").doc(getDate()).set({
+        "patientphone" : FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
         "hospitalphone": data["docsnap"]["phone"],
         "hospitalname" : data["docsnap"]["name"],
         "hospitalemail": data["docsnap"]["email"],

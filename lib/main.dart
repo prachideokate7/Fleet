@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:untitled1/UI/Hospital/MainScreen/BookedSlots/BookingDetails.dart';
 import 'package:untitled1/UI/Patient/Mainscreen/PatientMainScreen.dart';
 import 'package:untitled1/UI/Patient/Login%20and%20Signup/PatientSignupScreen.dart';
 
@@ -8,6 +9,7 @@ import 'UI/Hospital/MainScreen/Add Slots/SelectSlotsScreen.dart';
 import 'UI/Patient/Mainscreen/HospitalInfoScreen/DoctorNamesList.dart';
 import 'UI/Patient/Mainscreen/DoctorListScreen/chooseDoctorScreen.dart';
 import 'UI/Patient/Mainscreen/SlotListScreen/chooseSlotScreen.dart';
+import 'UI/Patient/ShowHistory/BookingDetails.dart';
 import 'UI/choosePHScreen.dart';
 import 'UI/Hospital/Login and Signup/HospitalLoginScreen.dart';
 import 'UI/Hospital/MainScreen/HospitalMainScreen.dart';
@@ -49,6 +51,8 @@ class _MainClassState extends State<MainClass> {
         '/patientMainScreen/selectDoctor' : (context) =>DoctorNamesList(),
         '/patientMainScreen/selectDoctor/chooseDoctorScreen' : (context) =>ChooseDoctorScreen(),
         '/patientMainScreen/selectDoctor/chooseSlotScreen' : (context) =>ChooseSlotScreen(),
+        '/patientMainScreen/bookingsDetails' : (context) =>BookingList(),
+        '/HospitalMainScreen/bookingsDetails' : (context) =>BookingListHospital(),
 
       },
       initialRoute: '/',

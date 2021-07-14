@@ -22,7 +22,7 @@ class _BookedSlotsState extends State<BookedSlots> {
   @override
   Widget build(BuildContext context) {
     collectionReference = FirebaseFirestore.instance
-        .collection("patients")
+        .collection("hospitals")
         .doc(FirebaseAuth.instance.currentUser!.phoneNumber.toString())
         .collection("bookings");
     return AnimatedContainer(
