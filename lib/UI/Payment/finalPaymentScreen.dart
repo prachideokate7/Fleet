@@ -6,6 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:untitled1/UI/Patient/Mainscreen/HospitalMainScreen/HospitalListScreen.dart';
 import 'package:untitled1/components/rounded_button.dart';
+import 'package:untitled1/components/rounded_input_field.dart';
+import 'package:untitled1/components/text_field_container.dart';
 
 late DocumentReference docRef;
 late BuildContext ctx;
@@ -19,6 +21,7 @@ class FinalPaymentScreen extends StatefulWidget {
 class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
   late Razorpay _razorpay;
   var data;
+  TextEditingController disController = new TextEditingController();
 
   @override
   void initState() {
@@ -58,11 +61,9 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
     print("yd" + data["doctor"]["name"]);
     ctx = context;
     return Scaffold(
-      body: Stack(
-        children: [
-          getbakground(),
-        ],
-      ),
+      body: SingleChildScrollView(
+        child: getbakground(),
+      )
     );
   }
 
@@ -275,6 +276,10 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
             color: Color(0xff003358),
             thickness: 1,
           ),
+          RoundedInputField(
+              controller: disController,
+              hintText: "Disease Name",
+              icon: Icons.verified_user),
           RoundedButton(
             text: 'Pay Now',
             press: checkOut,
@@ -302,7 +307,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         "doctorname"   : data["doctor"]["name"],
         "fees"         : "100",
         "transid"      : res.paymentId.toString(),
-        "disease"      : "des",
+        "disease"      : disController.text.toString(),
         "slot"         : data["slot"]
       });
       FirebaseFirestore.instance.collection("hospitals").doc(
@@ -319,7 +324,7 @@ class _FinalPaymentScreenState extends State<FinalPaymentScreen> {
         "disease"      : "des",
         "slot"         : data["slot"]
       });
-      Navigator.pushReplacementNamed(context, '/patientMainScreen');
+      Navigator.pushReplacementNamed(context, '/successfulPaymentScreen');
     }
   }
 }

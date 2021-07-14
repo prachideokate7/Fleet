@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:untitled1/UI/Hospital/MainScreen/BookedSlots/BookingDetails.dart';
 import 'package:untitled1/UI/Patient/Mainscreen/PatientMainScreen.dart';
 import 'package:untitled1/UI/Patient/Login%20and%20Signup/PatientSignupScreen.dart';
+import 'package:untitled1/UI/Payment/SuccessScreen.dart';
 
 import 'UI/Hospital/MainScreen/Add Slots/AddSlotsMainScreen.dart';
 import 'UI/Hospital/MainScreen/Add Slots/SelectSlotsScreen.dart';
@@ -53,6 +54,7 @@ class _MainClassState extends State<MainClass> {
         '/patientMainScreen/selectDoctor/chooseSlotScreen' : (context) =>ChooseSlotScreen(),
         '/HospitalMainScreen/bookingsDetails' : (context) =>BookingList(),
         '/patientMainScreen/bookingsDetails' : (context) =>BookingListPatient(),
+        '/successfulPaymentScreen' : (context) =>SuccessScreen(),
 
       },
       initialRoute: '/',

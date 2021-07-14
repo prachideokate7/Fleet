@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../constants.dart';
+import 'package:untitled1/components/rounded_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 late var doc;
@@ -378,10 +378,38 @@ class _BookingListState extends State<BookingList> {
               color: Color(0xff003358),
               thickness: 1,
             ),
-            SizedBox(height: 40,)
+            RoundedButton(text: "Connect with doctor", press : (){openwhatsapp(doc["hospitalphone"]);}),
+            SizedBox(height: 40,),
           ],
         ),
       ),
     );
   }
+  openwhatsapp(String whatsapp) async{
+    var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=hello";
+    var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    if(false){
+      // for iOS phone only
+      if( await canLaunch(whatappURL_ios)){
+        await launch(whatappURL_ios, forceSafariVC: false);
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: new Text("whatsapp no installed")));
+
+      }
+
+    }else{
+      // android , web
+      if( await canLaunch(whatsappURl_android)){
+        await launch(whatsappURl_android);
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: new Text("whatsapp no installed")));
+      }
+
+
+    }
+
+  }
+
 }

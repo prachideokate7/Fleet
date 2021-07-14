@@ -55,6 +55,10 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
           },
           codeAutoRetrievalTimeout: (String verificationId) {},
         );
+      }else{
+        EasyLoading.showError(
+          'Account Not Present',
+        );
       }
     } else {
       ConfirmationResult confirmationResult = await FirebaseAuth.instance
