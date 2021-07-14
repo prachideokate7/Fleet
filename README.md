@@ -1,16 +1,40 @@
-# untitled1
+<p align="center" >
+<img src="ReadFiles/ss/poster.jpg"width="100%" height="100%"/>
+</p>
 
-A new Flutter project.
+# Fleet
+The pandemic hit last year shook health sector completely. A portal first of its kind to connect health services and needy at one click. Keeping track of availability of doctors which will be prove as a boon in emergency cases .
+Advance registration will effectively manage the crowd at hospitals and in turn the adverse effect of the crowd can be avoided .
 
-## Getting Started
+Android 
+-----
+<p align="center" >
+<img src="ReadFiles/ss/3.jpg"width="20%" height="10%"/>
+<img src="ReadFiles/ss/6.jpg" width="20%" height="10%"/>
+<img src="ReadFiles/ss/4.jpg" width="20%" height="10%"/>
+<img src="ReadFiles/ss/5.jpg"width="20%" height="10%"/>
+</p>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<img src="assets/icon/main_logo.png" align="right" width="20%" height="100%"></img>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Instructions
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div style="display:flex;">
+  
+- Sign-up while first accessing the app
+- Login for next usages
+- Select best suited hospitals/clinics
+- Choose from available slots
+- Make Payment
+
+  (For Hospitals)
+- Add doctor's details
+- Add Slots
+
+</div>
+
+
+Install
+---------
+The app will be hosted on playstore soon.
