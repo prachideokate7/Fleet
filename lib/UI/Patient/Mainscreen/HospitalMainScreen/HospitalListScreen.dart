@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'HospitalWidgets.dart';
+
 late var userdata;
+
 class HospitalListScreen extends StatefulWidget {
-  HospitalListScreen(documentSnapshot){
+  HospitalListScreen(documentSnapshot) {
     userdata = documentSnapshot;
   }
 
@@ -124,18 +126,6 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
     return Container(
       child: getData(),
       height: MediaQuery.of(context).size.height - 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-        color: const Color(0xffffffff),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0x29000000),
-            offset: Offset(0, 0),
-            blurRadius: 15,
-          ),
-        ],
-      ),
     );
   }
 
@@ -154,7 +144,8 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
             final List<DocumentSnapshot> documents = snapshot.data!.docs;
             return ListView(
                 children: documents
-                    .map((doc) => HospitalWidget(doc, collectionReference, userdata))
+                    .map((doc) =>
+                        HospitalWidget(doc, collectionReference, userdata))
                     .toList());
           } else if (snapshot.hasError) {
             return Text("Something went wrong!");

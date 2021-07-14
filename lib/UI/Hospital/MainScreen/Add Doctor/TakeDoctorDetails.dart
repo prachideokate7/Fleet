@@ -26,6 +26,8 @@ class _TakeDoctorDetailsState extends State<TakeDoctorDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: MediaQuery.of(context).size.height - 100,
+
         child: Column(
           children: [
             RoundedInputField(hintText: "Doctor Name", controller: doctorName, icon: Icons.supervised_user_circle,),

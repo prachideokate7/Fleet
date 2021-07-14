@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/rounded_button.dart';
 import 'HistroyAppointmentWidget.dart';
 
 late CollectionReference collectionReference;
@@ -20,10 +19,13 @@ class _ShowHistoryState extends State<ShowHistory> {
   double yOffset = 0;
   double scaleFactor = 1;
   bool isDrawerOpen = false;
+
   @override
   Widget build(BuildContext context) {
-    collectionReference = FirebaseFirestore.instance.collection("patients").doc(
-        FirebaseAuth.instance.currentUser!.phoneNumber.toString()).collection("bookings");
+    collectionReference = FirebaseFirestore.instance
+        .collection("patients")
+        .doc(FirebaseAuth.instance.currentUser!.phoneNumber.toString())
+        .collection("bookings");
     return AnimatedContainer(
       transform: Matrix4.translationValues(xOffset, yOffset, 0)
         ..scale(scaleFactor)
@@ -31,7 +33,8 @@ class _ShowHistoryState extends State<ShowHistory> {
       duration: Duration(milliseconds: 300),
       decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.all(isDrawerOpen ? Radius.circular(40) : Radius.circular(0))),
+          borderRadius: BorderRadius.all(
+              isDrawerOpen ? Radius.circular(40) : Radius.circular(0))),
       child: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -46,26 +49,26 @@ class _ShowHistoryState extends State<ShowHistory> {
                   children: [
                     isDrawerOpen
                         ? IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        setState(() {
-                          xOffset = 0;
-                          yOffset = 0;
-                          scaleFactor = 1;
-                          isDrawerOpen = false;
-                        });
-                      },
-                    )
+                            icon: Icon(Icons.arrow_back_ios),
+                            onPressed: () {
+                              setState(() {
+                                xOffset = 0;
+                                yOffset = 0;
+                                scaleFactor = 1;
+                                isDrawerOpen = false;
+                              });
+                            },
+                          )
                         : IconButton(
-                        icon: Icon(Icons.menu),
-                        onPressed: () {
-                          setState(() {
-                            xOffset = 230;
-                            yOffset = 150;
-                            scaleFactor = 0.6;
-                            isDrawerOpen = true;
-                          });
-                        }),
+                            icon: Icon(Icons.menu),
+                            onPressed: () {
+                              setState(() {
+                                xOffset = 230;
+                                yOffset = 150;
+                                scaleFactor = 0.6;
+                                isDrawerOpen = true;
+                              });
+                            }),
                     Text("Appointment"),
                     CircleAvatar()
                   ],
@@ -83,10 +86,7 @@ class _ShowHistoryState extends State<ShowHistory> {
     return Column(
       children: [
         Container(
-          height: MediaQuery
-              .of(context)
-              .size
-              .height - 100,
+          height: MediaQuery.of(context).size.height - 100,
           child: StreamBuilder<QuerySnapshot>(
               stream: collectionReference.snapshots(),
               builder: (context, snapshot) {
@@ -94,8 +94,8 @@ class _ShowHistoryState extends State<ShowHistory> {
                   final List<DocumentSnapshot> documents = snapshot.data!.docs;
                   return ListView(
                       children: documents
-                          .map((doc) =>
-                          HistoryAppointmentWidget(doc, collectionReference))
+                          .map((doc) => HistoryAppointmentWidget(
+                              doc, collectionReference))
                           .toList());
                 } else if (snapshot.hasError) {
                   return Text("Something went wrong!");
