@@ -45,7 +45,9 @@ class _PatientLoginScreenState extends State<PatientSignupScreen> {
           phoneNumber: phoneNumber,
           verificationCompleted: (PhoneAuthCredential credential) {},
           verificationFailed: (FirebaseAuthException e) {
-            Fluttertoast.showToast(msg: e.toString());
+            EasyLoading.showError(
+              e.toString(),
+            );
           },
           codeSent: (String verificationId, int? resendToken) {
             EasyLoading.showSuccess(

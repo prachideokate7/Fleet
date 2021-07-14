@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "690713565687",
-    "project_id": "untitled1-e9371",
-    "storage_bucket": "untitled1-e9371.appspot.com"
+    "project_number": "256880750366",
+    "project_id": "fleet-39ceb",
+    "storage_bucket": "fleet-39ceb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:690713565687:android:c1e888bce68c91053bb6f2",
+        "mobilesdk_app_id": "1:256880750366:android:5740fecf4921af71dfe30f",
         "android_client_info": {
           "package_name": "com.example.untitled1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "690713565687-4m0u2garjj0827gaja9v16e04rje61tk.apps.googleusercontent.com",
+          "client_id": "256880750366-sjffm526cukbib8n6mjpf6c5pcjv780k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.untitled1",
+            "certificate_hash": "a916046b3885115f9c395b95eae48464385a1946"
+          }
+        },
+        {
+          "client_id": "256880750366-j50ldb8noc9tmur71oefd2oo7rl7bd45.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDWBIhH8S6n2EqpZKtYNarC9Tbxv8RkzgY"
+          "current_key": "AIzaSyDnypQ-mjzWU5k988zhq9tpPFFBRyOBS5c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "690713565687-4m0u2garjj0827gaja9v16e04rje61tk.apps.googleusercontent.com",
+              "client_id": "256880750366-j50ldb8noc9tmur71oefd2oo7rl7bd45.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

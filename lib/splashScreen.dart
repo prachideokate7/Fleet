@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'components/rounded_button.dart';
+
 class splashScreen extends StatefulWidget {
   const splashScreen({Key? key}) : super(key: key);
 
@@ -31,10 +33,27 @@ class _splashScreenState extends State<splashScreen> {
   Widget build(BuildContext context) {
     initializeFirebase(context);
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Image.asset("assets/icon/main_logo.png",width: 80,height: 80,),
-      ),
+      body: Stack(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            child: Image.asset("assets/icon/main_logo.png",width: 80,height: 80,),
+          ),
+          Container(
+            margin: EdgeInsets.all(30),
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              "FLEET",
+              style: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: 26,
+                  fontFamily: "oswald",
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 8),
+            ),
+          ),
+        ],
+      )
     );
   }
 }
