@@ -51,8 +51,8 @@ class _MainClassState extends State<MainClass> {
         '/patientMainScreen/selectDoctor' : (context) =>DoctorNamesList(),
         '/patientMainScreen/selectDoctor/chooseDoctorScreen' : (context) =>ChooseDoctorScreen(),
         '/patientMainScreen/selectDoctor/chooseSlotScreen' : (context) =>ChooseSlotScreen(),
-        '/patientMainScreen/bookingsDetails' : (context) =>BookingList(),
-        '/HospitalMainScreen/bookingsDetails' : (context) =>BookingListHospital(),
+        '/HospitalMainScreen/bookingsDetails' : (context) =>BookingList(),
+        '/patientMainScreen/bookingsDetails' : (context) =>BookingListPatient(),
 
       },
       initialRoute: '/',

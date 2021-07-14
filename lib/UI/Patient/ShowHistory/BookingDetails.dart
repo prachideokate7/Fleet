@@ -6,14 +6,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 late var doc;
 
-class BookingListHospital extends StatefulWidget {
-  const BookingListHospital({Key? key}) : super(key: key);
+class BookingListPatient extends StatefulWidget {
+  const BookingListPatient({Key? key}) : super(key: key);
 
   @override
-  _BookingListHospitalState createState() => _BookingListHospitalState();
+  _BookingListPatientState createState() => _BookingListPatientState();
 }
 
-class _BookingListHospitalState extends State<BookingListHospital> {
+class _BookingListPatientState extends State<BookingListPatient> {
   var data;
 
   @override
@@ -378,8 +378,8 @@ class _BookingListHospitalState extends State<BookingListHospital> {
               color: Color(0xff003358),
               thickness: 1,
             ),
+            RoundedButton(text: "Connect with doctor", press : (){openwhatsapp(doc["hospitalphone"]);}),
             SizedBox(height: 40,),
-            RoundedButton(text: "Connect with doctor", press: openwhatsapp(doc["hospitalphone"]))
           ],
         ),
       ),
